@@ -117,6 +117,11 @@ public class RateLimitConfig implements GlobalFilter, Ordered {
     /**
      * Behind an ALB the socket address is the load balancer, so the left-most
      * X-Forwarded-For entry is the real client.
+     *
+     * With forward-headers-strategy=framework the header has usually already
+     * been consumed and the remote address rebuilt from it as an *unresolved*
+     * InetSocketAddress, whose getAddress() is null. getHostString() covers
+     * both the resolved and unresolved cases.
      */
     private String clientIdentity(ServerWebExchange exchange) {
         String forwarded = exchange.getRequest().getHeaders().getFirst("X-Forwarded-For");
@@ -124,7 +129,7 @@ public class RateLimitConfig implements GlobalFilter, Ordered {
             return forwarded.split(",")[0].trim();
         }
         return exchange.getRequest().getRemoteAddress() != null
-                ? exchange.getRequest().getRemoteAddress().getAddress().getHostAddress()
+                ? exchange.getRequest().getRemoteAddress().getHostString()
                 : "unknown";
     }
 
