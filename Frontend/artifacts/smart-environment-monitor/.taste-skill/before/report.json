@@ -1,0 +1,1819 @@
+{
+ "url": "http://localhost:5173/",
+ "at": "2026-10-29T04:17:42.482Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 2,
+   "filled": [
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 1615,
+     "screens": 1.8,
+     "words": 257,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 32,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "28.6",
+     "words": 1,
+     "chars": 4,
+     "lines": 1,
+     "size": 112,
+     "vw": 7.8,
+     "font": "Atkinson Hyperlegible",
+     "weight": 700,
+     "tracking": -0.04,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.15,
+     "top": 261,
+     "tag": "strong",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Know the air around you.",
+     "words": 5,
+     "lines": 2,
+     "size": 73.6,
+     "font": "Atkinson Hyperlegible"
+    },
+    "headings": [
+     {
+      "text": "Know the air around you.",
+      "words": 5,
+      "chars": 24,
+      "lines": 2,
+      "size": 73.6,
+      "vw": 5.1,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.44,
+      "top": 206,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "28.6",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 112,
+      "vw": 7.8,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.15,
+      "top": 261,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Every station, as it last reported",
+      "words": 6,
+      "chars": 34,
+      "lines": 1,
+      "size": 36.8,
+      "vw": 2.6,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.37,
+      "top": 727,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured, not manufactured.",
+      "words": 3,
+      "chars": 27,
+      "lines": 2,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.36,
+      "top": 1118,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 4,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Atkinson Hyperlegible",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      28,
+      37,
+      40,
+      74,
+      112
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Atkinson Hyperlegible",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.5
+     },
+     "measureChars": 61,
+     "max": {
+      "size": 112,
+      "vw": 7.8,
+      "font": "Atkinson Hyperlegible",
+      "text": "28.6"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 3,
+     "microLabelShare": 0.038,
+     "microSamples": [
+      "Featured station",
+      "Across the network",
+      "How to read the signal"
+     ],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 7
+    },
+    "eyebrows": [
+     {
+      "text": "7 of 7 stations reporting",
+      "above": "Know the air around you.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 14,
+      "top": 148
+     },
+     {
+      "text": "Guntur",
+      "above": "28.6",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 15,
+      "top": 214
+     },
+     {
+      "text": "Across the network",
+      "above": "Every station, as it last reported",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 705
+     },
+     {
+      "text": "How to read the signal",
+      "above": "Measured, not manufactured.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1097
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f0f9ff",
+     "bodyBgHsl": {
+      "h": 204,
+      "s": 1,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f0f9ff",
+       "top": 0,
+       "hsl": {
+        "h": 204,
+        "s": 1,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#48566a",
+       "share": 0.49
+      },
+      {
+       "color": "#0f1729",
+       "share": 0.2
+      },
+      {
+       "color": "#e1f3fe",
+       "share": 0.14
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.07
+      },
+      {
+       "color": "#65758b",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#e1f3fe",
+      "hsl": {
+       "h": 203,
+       "s": 0.94,
+       "l": 0.94
+      },
+      "fg": "#0f1729"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 40,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Overview",
+      "Operator sign in",
+      "Use my location"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 7,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "label.search-box → rgba(12, 74, 110, 0.14) 0px 18px 40px 0px, rgba(12, 74, 110, 0.06) 0px 4px 10px ",
+      "aside.conditions-card → rgba(8, 47, 73, 0.35) 0px 30px 60px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px"
+     ],
+     "gradients": 2,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.public-shell → radial-gradient(1200px 500px at 85% -10%, rgba(186, 229, 253, 0.45), rgba(0, 0, 0, 0) 60%), none",
+      "section.hero → radial-gradient(520px 360px at 88% 8%, rgba(251, 189, 35, 0.42), rgba(0, 0, 0, 0) 65%), radial-gradient(700px "
+     ],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.public-header 1440px",
+      "div.conditions-foot 452px",
+      "footer.public-footer 1440px"
+     ],
+     "outlinedBoxes": 8,
+     "dashed": 0,
+     "blurred": 2,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 792
+      },
+      {
+       "count": 3,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1097
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 69,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "atkinson hyperlegible"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 1615,
+    "margins": {
+     "left": 120,
+     "right": 142
+    },
+    "sections": [
+     {
+      "sel": "section.hero",
+      "tag": "section",
+      "top": 69,
+      "height": 572,
+      "words": 60,
+      "media": 0,
+      "middle": 81,
+      "heading": {
+       "text": "28.6",
+       "size": 112,
+       "tag": "strong"
+      },
+      "left": 120,
+      "right": 164,
+      "textLeft": 120,
+      "textRight": 164,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 641,
+      "height": 456,
+      "words": 65,
+      "media": 0,
+      "middle": 58,
+      "heading": {
+       "text": "Every station, as it last reported",
+       "size": 37,
+       "tag": "h2"
+      },
+      "left": 120,
+      "right": 141,
+      "textLeft": 120,
+      "textRight": 141,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 1097,
+      "height": 421,
+      "words": 98,
+      "media": 0,
+      "middle": 164,
+      "heading": {
+       "text": "Measured, not manufactured.",
+       "size": 40,
+       "tag": "h2"
+      },
+      "left": 120,
+      "right": 147,
+      "textLeft": 120,
+      "textRight": 147,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Know the air around you.",
+      "size": 74,
+      "top": 206,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 120,
+      "n": 6
+     },
+     {
+      "x": 771,
+      "n": 2
+     },
+     {
+      "x": 141,
+      "n": 1
+     },
+     {
+      "x": 445,
+      "n": 1
+     },
+     {
+      "x": 749,
+      "n": 1
+     },
+     {
+      "x": 835,
+      "n": 1
+     },
+     {
+      "x": 1053,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 15,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.11,
+    "voidBox": {
+     "x": 300,
+     "y": 600,
+     "w": 1140,
+     "h": 120
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 3,
+   "filled": [
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 2404,
+     "screens": 2.3,
+     "words": 257,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 32,
+     "sections": 3,
+     "horizontalOverflow": 137,
+     "overflowCulprits": [
+      "span.operator-link-full (+101px)",
+      "path (+118px)",
+      "path (+118px)"
+     ],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "28.7",
+     "words": 1,
+     "chars": 4,
+     "lines": 1,
+     "size": 94.1,
+     "vw": 12.3,
+     "font": "Atkinson Hyperlegible",
+     "weight": 700,
+     "tracking": -0.04,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.24,
+     "top": 588,
+     "tag": "strong",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Know the air around you.",
+     "words": 5,
+     "lines": 1,
+     "size": 53.2,
+     "font": "Atkinson Hyperlegible"
+    },
+    "headings": [
+     {
+      "text": "Know the air around you.",
+      "words": 5,
+      "chars": 24,
+      "lines": 1,
+      "size": 53.2,
+      "vw": 6.9,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 175,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "28.7",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 94.1,
+      "vw": 12.3,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.24,
+      "top": 588,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Every station, as it last reported",
+      "words": 6,
+      "chars": 34,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.57,
+      "top": 1021,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured, not manufactured.",
+      "words": 3,
+      "chars": 27,
+      "lines": 1,
+      "size": 31.6,
+      "vw": 4.1,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.94,
+      "top": 1662,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 4,
+     "maxLines": 1,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Atkinson Hyperlegible",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      28,
+      30,
+      32,
+      53,
+      94
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Atkinson Hyperlegible",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.5
+     },
+     "measureChars": 85,
+     "max": {
+      "size": 94.1,
+      "vw": 12.3,
+      "font": "Atkinson Hyperlegible",
+      "text": "28.7"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 3,
+     "microLabelShare": 0.038,
+     "microSamples": [
+      "Featured station",
+      "Across the network",
+      "How to read the signal"
+     ],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 7
+    },
+    "eyebrows": [
+     {
+      "text": "7 of 7 stations reporting",
+      "above": "Know the air around you.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 14,
+      "top": 117
+     },
+     {
+      "text": "Guntur",
+      "above": "28.7",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 15,
+      "top": 541
+     },
+     {
+      "text": "Across the network",
+      "above": "Every station, as it last reported",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1000
+     },
+     {
+      "text": "How to read the signal",
+      "above": "Measured, not manufactured.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1640
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f0f9ff",
+     "bodyBgHsl": {
+      "h": 204,
+      "s": 1,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f0f9ff",
+       "top": 0,
+       "hsl": {
+        "h": 204,
+        "s": 1,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#48566a",
+       "share": 0.49
+      },
+      {
+       "color": "#0f1729",
+       "share": 0.2
+      },
+      {
+       "color": "#e1f3fe",
+       "share": 0.14
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.07
+      },
+      {
+       "color": "#65758b",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#e1f3fe",
+      "hsl": {
+       "h": 203,
+       "s": 0.94,
+       "l": 0.94
+      },
+      "fg": "#0f1729"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 40,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Overview",
+      "Operator sign in",
+      "Use my location"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 7,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "label.search-box → rgba(12, 74, 110, 0.14) 0px 18px 40px 0px, rgba(12, 74, 110, 0.06) 0px 4px 10px ",
+      "aside.conditions-card → rgba(8, 47, 73, 0.35) 0px 30px 60px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px"
+     ],
+     "gradients": 2,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.public-shell → radial-gradient(1200px 500px at 85% -10%, rgba(186, 229, 253, 0.45), rgba(0, 0, 0, 0) 60%), none",
+      "section.hero → radial-gradient(520px 360px at 88% 8%, rgba(251, 189, 35, 0.42), rgba(0, 0, 0, 0) 65%), radial-gradient(700px "
+     ],
+     "gradientText": 0,
+     "hairlines": 3,
+     "hairlineSamples": [
+      "header.public-header 768px",
+      "div.conditions-foot 654px",
+      "footer.public-footer 768px"
+     ],
+     "outlinedBoxes": 8,
+     "dashed": 0,
+     "blurred": 2,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1079
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 69,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "atkinson hyperlegible"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 2404,
+    "margins": {
+     "left": 24,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section.hero",
+      "tag": "section",
+      "top": 69,
+      "height": 867,
+      "words": 60,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "28.7",
+       "size": 94,
+       "tag": "strong"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 936,
+      "height": 705,
+      "words": 65,
+      "media": 0,
+      "middle": 21,
+      "heading": {
+       "text": "Every station, as it last reported",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 45,
+      "textLeft": 24,
+      "textRight": 45,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 1640,
+      "height": 627,
+      "words": 98,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Measured, not manufactured.",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.public-footer",
+      "tag": "footer",
+      "top": 2267,
+      "height": 136,
+      "words": 12,
+      "media": 0,
+      "middle": 146,
+      "heading": null,
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Know the air around you.",
+      "size": 53,
+      "top": 175,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 5
+     },
+     {
+      "x": 45,
+      "n": 2
+     },
+     {
+      "x": 109,
+      "n": 2
+     },
+     {
+      "x": 413,
+      "n": 2
+     },
+     {
+      "x": 57,
+      "n": 1
+     },
+     {
+      "x": 335,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 15,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 4,
+   "filled": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 1,
+    "css": 1,
+    "transitions": 0,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 3291,
+     "screens": 3.9,
+     "words": 250,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 32,
+     "sections": 3,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "28.3",
+     "words": 1,
+     "chars": 4,
+     "lines": 1,
+     "size": 72,
+     "vw": 18.5,
+     "font": "Atkinson Hyperlegible",
+     "weight": 700,
+     "tracking": -0.04,
+     "leading": 0.9,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.37,
+     "top": 641,
+     "tag": "strong",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Know the air around you.",
+     "words": 5,
+     "lines": 2,
+     "size": 41.6,
+     "font": "Atkinson Hyperlegible"
+    },
+    "headings": [
+     {
+      "text": "Know the air around you.",
+      "words": 5,
+      "chars": 24,
+      "lines": 2,
+      "size": 41.6,
+      "vw": 10.7,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 151,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur Market Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.5,
+      "top": 567,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "28.3",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 72,
+      "vw": 18.5,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.04,
+      "leading": 0.9,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.37,
+      "top": 641,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Every station, as it last reported",
+      "words": 6,
+      "chars": 34,
+      "lines": 2,
+      "size": 27.2,
+      "vw": 7,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 1018,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured, not manufactured.",
+      "words": 3,
+      "chars": 27,
+      "lines": 2,
+      "size": 28.8,
+      "vw": 7.4,
+      "font": "Atkinson Hyperlegible",
+      "weight": 700,
+      "tracking": -0.02,
+      "leading": 1.12,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 2236,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 5,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 5,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Atkinson Hyperlegible",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      22,
+      27,
+      28,
+      29,
+      42,
+      72
+     ],
+     "sizeCount": 14,
+     "notLoaded": [],
+     "body": {
+      "font": "Atkinson Hyperlegible",
+      "size": 15,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 7.5
+     },
+     "measureChars": 42,
+     "max": {
+      "size": 72,
+      "vw": 18.5,
+      "font": "Atkinson Hyperlegible",
+      "text": "28.3"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 3,
+     "microLabelShare": 0.039,
+     "microSamples": [
+      "Featured station",
+      "Across the network",
+      "How to read the signal"
+     ],
+     "upperShare": 0.1,
+     "centerShare": 0.01,
+     "smallText": 7
+    },
+    "eyebrows": [
+     {
+      "text": "7 of 7 stations reporting",
+      "above": "Know the air around you.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 14,
+      "top": 93
+     },
+     {
+      "text": "Across the network",
+      "above": "Every station, as it last reported",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 997
+     },
+     {
+      "text": "How to read the signal",
+      "above": "Measured, not manufactured.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 2214
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#f0f9ff",
+     "bodyBgHsl": {
+      "h": 204,
+      "s": 1,
+      "l": 0.97
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#f0f9ff",
+       "top": 0,
+       "hsl": {
+        "h": 204,
+        "s": 1,
+        "l": 0.97
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#48566a",
+       "share": 0.49
+      },
+      {
+       "color": "#0f1729",
+       "share": 0.2
+      },
+      {
+       "color": "#e1f3fe",
+       "share": 0.14
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.07
+      },
+      {
+       "color": "#65758b",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#ffffff",
+      "hsl": {
+       "h": 0,
+       "s": 0,
+       "l": 1
+      },
+      "fg": "#0f1729"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 3,
+     "radius": 10,
+     "height": 40,
+     "withShadow": 1,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Sign in",
+      "Use my location",
+      "Overview"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 7,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "label.search-box → rgba(12, 74, 110, 0.14) 0px 18px 40px 0px, rgba(12, 74, 110, 0.06) 0px 4px 10px ",
+      "aside.conditions-card → rgba(8, 47, 73, 0.35) 0px 30px 60px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px",
+      "a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px"
+     ],
+     "gradients": 2,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.public-shell → radial-gradient(1200px 500px at 85% -10%, rgba(186, 229, 253, 0.45), rgba(0, 0, 0, 0) 60%), none",
+      "section.hero → radial-gradient(520px 360px at 88% 8%, rgba(251, 189, 35, 0.42), rgba(0, 0, 0, 0) 65%), radial-gradient(700px "
+     ],
+     "gradientText": 0,
+     "hairlines": 4,
+     "hairlineSamples": [
+      "header.public-header 390px",
+      "div.conditions-foot 316px",
+      "footer.public-footer 390px",
+      "nav.tabbar 390px"
+     ],
+     "outlinedBoxes": 8,
+     "dashed": 0,
+     "blurred": 3,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 61,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "atkinson hyperlegible"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 3291,
+    "margins": {
+     "left": 16,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section.hero",
+      "tag": "section",
+      "top": 61,
+      "height": 896,
+      "words": 59,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Know the air",
+       "size": 42,
+       "tag": "h1"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 957,
+      "height": 1257,
+      "words": 65,
+      "media": 0,
+      "middle": 29,
+      "heading": {
+       "text": "Every station, as it last reported",
+       "size": 27,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 37,
+      "textLeft": 16,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section.page-container.section",
+      "tag": "section",
+      "top": 2214,
+      "height": 781,
+      "words": 98,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Measured, not manufactured.",
+       "size": 29,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 24,
+      "textLeft": 16,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.public-footer",
+      "tag": "footer",
+      "top": 2995,
+      "height": 228,
+      "words": 12,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 16,
+      "right": 24,
+      "textLeft": 16,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Know the air around you.",
+      "size": 42,
+      "top": 151,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 16,
+      "n": 6
+     },
+     {
+      "x": 37,
+      "n": 5
+     },
+     {
+      "x": 89,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 15,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "4 eyebrow/kicker label(s) above headings: \"7 of 7 stations reporting\" (pill) above \"Know the air around you.\"; \"Guntur\" above \"28.6\"; \"Across the network\" above \"Every station, as it last reported\"; \"How to read the signal\" above \"Measured, not manufactured.\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "3 tiny uppercase letter-spaced labels (e.g. \"Featured station\", \"Across the network\", \"How to read the signal\").",
+   "fix": "Use sentence-case text at a readable size, or delete the label.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "2 gradient fill(s): div.public-shell → radial-gradient(1200px 500px at 85% -10%, rgba(186, 229, 253, 0.45), rgba(0, 0, 0, 0) 60%), none | section.hero → radial-gradient(520px 360px at 88% 8%, rgba(251, 189, 35, 0.42), rgba(0, 0, 0, 0) 65%), radial-gradient(700px ",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "shadow",
+   "width": 1440,
+   "message": "7 box-shadow(s) on elements at rest: label.search-box → rgba(12, 74, 110, 0.14) 0px 18px 40px 0px, rgba(12, 74, 110, 0.06) 0px 4px 10px  | aside.conditions-card → rgba(8, 47, 73, 0.35) 0px 30px 60px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0 | a.station-card → rgba(12, 74, 110, 0.06) 0px 1px 2px 0px",
+   "fix": "Remove. Separate surfaces with a tone step or space. Shadows are for things that really float (menus, dialogs, sticky bars).",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with shadow/glow.",
+   "fix": "Flat fill, one colour.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "3 thin rule(s)/divider line(s): header.public-header 1440px | div.conditions-foot 452px | footer.public-footer 1440px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "8 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "glass",
+   "width": 1440,
+   "message": "2 backdrop-blur surfaces.",
+   "fix": "One blurred sticky bar at most; glass cards are a tell.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "icon-cards",
+   "width": 1440,
+   "message": "2 row(s) of identical cards each topped with a small icon (4, 3 cards).",
+   "fix": "Replace with one composed section from the direction: a narrative split, a list set in large type, or real imagery per item.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "14 different font sizes (12, 13, 14, 15, 16, 17, 18, 20, 22, 28, 37, 40, 74, 112).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 15px.",
+   "fix": "Body copy 16–20px.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "7 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "dev-server",
+   "width": 1440,
+   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
+   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "font-not-dealt",
+   "width": 1440,
+   "message": "The sheet dealt Schibsted Grotesk and Schibsted Grotesk, but the page renders Atkinson Hyperlegible.",
+   "fix": "Load the dealt face (the link on the sheet) and put it first in font-family. A build that falls back to a default face lands on the default look."
+  },
+  {
+   "level": "WARN",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The margins differ: 120px on the left, 142px on the right, at 1440px.",
+   "fix": "Put the navigation and the content on one pair of margins; check for padding on one side only, a scrollbar gutter, or a header on another inset than the page."
+  },
+  {
+   "level": "FAIL",
+   "id": "still-page",
+   "width": 1440,
+   "message": "Only 1 element(s) moved while the page loaded and scrolled.",
+   "fix": "Build the motion layer (SKILL.md step 9, references/motion.md): the signature move, an entrance for the parts of every section, feedback on every control, and one moving picture. Transform and opacity only, with a reduced-motion fallback."
+  },
+  {
+   "level": "FAIL",
+   "id": "overflow",
+   "width": 768,
+   "message": "Page scrolls sideways by 137px at 768px. Widest offenders: span.operator-link-full (+101px), path (+118px), path (+118px).",
+   "fix": "Constrain the element that is wider than the viewport (max-width: 100%, or overflow: clip on its section)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\tablet-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\before\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

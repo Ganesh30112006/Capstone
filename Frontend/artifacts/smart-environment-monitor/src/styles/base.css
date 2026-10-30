@@ -1,0 +1,107 @@
+/* Base: element defaults, typography, focus. Semantic tokens only. */
+
+html {
+  background: hsl(var(--bg));
+  color: hsl(var(--text));
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: hsl(var(--bg));
+  color: hsl(var(--text));
+  font-family: var(--font-body);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+button, [role='button'], a, summary, select, label[for] { cursor: pointer; }
+
+/* One focus style everywhere, never removed. */
+:focus-visible {
+  outline: 2px solid hsl(var(--focus));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection { background: hsl(var(--primary) / .22); }
+
+/* Figures line up when they update in place. */
+.mono, .numeric, time, [data-numeric] {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  color: hsl(var(--text-muted));
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.page-container {
+  width: min(var(--page-max), calc(100% - 2 * var(--space-6)));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* A skip link is hidden until it is focused, then it is the first thing on screen. */
+a.visually-hidden:focus-visible {
+  position: fixed !important;
+  z-index: 100;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 10px 16px;
+  clip: auto;
+  border-radius: var(--radius-md);
+  color: hsl(var(--on-primary));
+  background: hsl(var(--primary));
+}
+
+.rotate-180 { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container { width: calc(100% - 2 * var(--space-4)); }
+}

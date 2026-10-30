@@ -1,0 +1,157 @@
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  application:
+    name: device-service
+  datasource:
+    url: ${DEVICE_DB_URL:jdbc:postgresql://localhost:5432/device_db}
+    username: ${DEVICE_DB_USERNAME:postgres}
+    password: ${DEVICE_DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX:10}
+      minimum-idle: ${DB_POOL_MIN:2}
+      connection-timeout: 10000
+      # Bounded lifetimes so a failed-over RDS instance is picked up promptly.
+      max-lifetime: 1200000
+      idle-timeout: 300000
+  jpa:
+    hibernate:
+      # Flyway owns the schema. Validate catches entity/schema drift at startup
+      # instead of silently mutating a production database.
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+    open-in-view: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    connection-timeout: 10s
+    # setMandatory(true) on the RabbitTemplate asks the broker to hand back a
+    # message it cannot route, but Spring only registers the returns callback
+    # when this is on. Without it the callback in RabbitMQConfig is unreachable
+    # code: an unroutable publish was discarded in silence while the log line
+    # written to report it could never fire.
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 10
+        concurrency: 2
+        max-concurrency: 8
+        # Exhausted retries must dead-letter, never loop back onto the queue.
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          max-attempts: 4
+          initial-interval: 1s
+          multiplier: 2.0
+          max-interval: 10s
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+        initial-interval: 500ms
+
+server:
+  port: ${DEVICE_SERVICE_PORT:8080}
+  shutdown: graceful
+
+# Trust boundary: only requests proxied by the gateway carry this secret.
+gateway:
+  internal-secret: ${GATEWAY_INTERNAL_SECRET:}
+  enforce-origin: ${GATEWAY_ENFORCE_ORIGIN:true}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  metrics:
+    tags:
+      application: device-service
+
+device:
+  heartbeat:
+    check-interval-ms: ${HEARTBEAT_CHECK_INTERVAL_MS:60000}
+    offline-threshold-minutes: ${HEARTBEAT_OFFLINE_THRESHOLD_MINUTES:5}
+
+aws:
+  region: ${AWS_REGION:us-east-1}
+  iot:
+    # Disabled by default so local development and CI run without AWS
+    # credentials. Provisioning and device commands fail loudly rather than
+    # emulating success when this is off.
+    enabled: ${AWS_IOT_ENABLED:false}
+    mqtt-endpoint: ${AWS_IOT_MQTT_ENDPOINT:}
+    policy-name: ${AWS_IOT_POLICY_NAME:weather-station-device-policy}
+    thing-type-name: ${AWS_IOT_THING_TYPE:weather-station}
+    thing-name-prefix: ${AWS_IOT_THING_PREFIX:weather-station-}
+    topic-prefix: ${AWS_IOT_TOPIC_PREFIX:weather/devices}
+  s3:
+    firmware-bucket: ${FIRMWARE_S3_BUCKET:}
+    # Devices download firmware with a short-lived signed URL; long expiries
+    # turn a leaked log line into an open download link.
+    presign-ttl-minutes: ${FIRMWARE_URL_TTL_MINUTES:15}
+
+# Outbound AWS calls are wrapped so a slow or failing IoT endpoint degrades the
+# console rather than tying up request threads.
+resilience4j:
+  circuitbreaker:
+    instances:
+      awsIot:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 3
+  timelimiter:
+    instances:
+      awsIot:
+        timeoutDuration: 5s
+
+logging:
+  level:
+    root: INFO
+    com.weatherplatform.deviceservice: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  jpa:
+    show-sql: true
+logging:
+  level:
+    com.weatherplatform.deviceservice: DEBUG

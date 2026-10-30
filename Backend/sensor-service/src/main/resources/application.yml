@@ -1,0 +1,153 @@
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  application:
+    name: sensor-service
+  datasource:
+    url: ${SENSOR_DB_URL:jdbc:postgresql://localhost:5432/sensor_db}
+    username: ${SENSOR_DB_USERNAME:postgres}
+    password: ${SENSOR_DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      # Sensor-service carries the highest write volume in the platform.
+      maximum-pool-size: ${DB_POOL_MAX:16}
+      minimum-idle: ${DB_POOL_MIN:4}
+      connection-timeout: 10000
+      max-lifetime: 1200000
+      idle-timeout: 300000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+          batch_size: 25
+    open-in-view: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    connection-timeout: 10s
+    # setMandatory(true) on the RabbitTemplate asks the broker to hand back a
+    # message it cannot route, but Spring only registers the returns callback
+    # when this is on. Without it the callback in RabbitMQConfig is unreachable
+    # code: an unroutable publish was discarded in silence while the log line
+    # written to report it could never fire.
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 20
+        concurrency: 4
+        max-concurrency: 12
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          max-attempts: 4
+          initial-interval: 1s
+          multiplier: 2.0
+          max-interval: 10s
+    template:
+      retry:
+        enabled: true
+        max-attempts: 3
+        initial-interval: 500ms
+
+server:
+  port: ${SENSOR_SERVICE_PORT:8081}
+  shutdown: graceful
+
+gateway:
+  internal-secret: ${GATEWAY_INTERNAL_SECRET:}
+  enforce-origin: ${GATEWAY_ENFORCE_ORIGIN:true}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: sensor-service
+
+# Deterministic sensor-failure detection. These are the operating envelopes of
+# the physical instruments — a reading outside them means a broken sensor, not
+# extreme weather. Tunable per deployment without a rebuild.
+sensor:
+  thresholds:
+    # rapid-change is a rate, per minute, not a difference between consecutive
+    # readings: the same jump means something different at one reading a second
+    # than at one a minute, and the reporting interval is a deployment choice.
+    temperature:
+      min: ${SENSOR_TEMP_MIN:-40.0}
+      max: ${SENSOR_TEMP_MAX:75.0}
+      rapid-change: ${SENSOR_TEMP_RAPID_CHANGE:25.0}
+    humidity:
+      min: ${SENSOR_HUMIDITY_MIN:0.0}
+      max: ${SENSOR_HUMIDITY_MAX:100.0}
+      rapid-change: ${SENSOR_HUMIDITY_RAPID_CHANGE:45.0}
+    air-quality:
+      min: ${SENSOR_AQI_MIN:0.0}
+      max: ${SENSOR_AQI_MAX:500.0}
+    pressure:
+      min: ${SENSOR_PRESSURE_MIN:300.0}
+      max: ${SENSOR_PRESSURE_MAX:1150.0}
+    oxygen:
+      min: ${SENSOR_OXYGEN_MIN:5.0}
+      max: ${SENSOR_OXYGEN_MAX:30.0}
+    # A stuck sensor has to satisfy both: enough identical samples, and enough
+    # time. The count alone means four minutes at one reading a minute and four
+    # seconds at one a second.
+    stuck-reading-count: ${SENSOR_STUCK_READING_COUNT:4}
+    stuck-window-seconds: ${SENSOR_STUCK_WINDOW_SECONDS:240}
+    recovery-hold-seconds: ${SENSOR_RECOVERY_HOLD_SECONDS:60}
+  retention:
+    enabled: ${SENSOR_RETENTION_ENABLED:true}
+    # Summaries are cheap and are kept indefinitely; raw readings are not.
+    # At one reading per station per second, 90 days of raw telemetry is tens of
+    # millions of rows for a seven-station fleet, so the raw window is short and
+    # history is served from the hourly roll-up.
+    rollup-cron: ${SENSOR_ROLLUP_CRON:0 10 * * * *}
+    prune-cron: ${SENSOR_PRUNE_CRON:0 30 3 * * *}
+    rollup-lag-hours: ${SENSOR_ROLLUP_LAG_HOURS:2}
+    rollup-window-hours: ${SENSOR_ROLLUP_WINDOW_HOURS:48}
+    retain-days: ${SENSOR_RETAIN_DAYS:14}
+
+logging:
+  level:
+    root: INFO
+    com.weatherplatform.sensorservice: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+  jpa:
+    show-sql: true
+logging:
+  level:
+    com.weatherplatform.sensorservice: DEBUG

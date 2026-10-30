@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.weatherplatform</groupId>
+    <artifactId>weather-platform-root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>weather-platform-root</name>
+    <description>Smart Weather Platform - Root POM</description>
+
+    <modules>
+        <module>device-service</module>
+        <module>sensor-service</module>
+        <module>auth-service</module>
+        <module>api-gateway</module>
+        <module>analytics-service</module>
+        <module>alert-service</module>
+        <module>iot-ingestion-service</module>
+        <module>iot-stream-service</module>
+    </modules>
+
+</project>

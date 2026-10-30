@@ -1,0 +1,62 @@
+name: Main Branch ECR Push
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  build-docker-images:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      matrix:
+        service:
+          - auth-service
+          - device-service
+          - sensor-service
+          - analytics-service
+          - alert-service
+          - api-gateway
+          - iot-ingestion-service
+          - ai-service
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java (if Java service)
+        if: matrix.service != 'ai-service'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Java Binaries (if Java service)
+        if: matrix.service != 'ai-service'
+        run: mvn clean package -pl ${{ matrix.service }} -am -DskipTests
+
+      # AWS Credentials placeholder (OIDC recommended)
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::123456789012:role/GitHubActionsRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        continue-on-error: true # Suppress error without actual AWS account
+
+      - name: Build Docker Image
+        run: |
+          docker build -t weatherplatform/${{ matrix.service }}:${{ github.sha }} ./${{ matrix.service }}
+
+      - name: Push to ECR (dry-run)
+        run: |
+          echo "Would push weatherplatform/${{ matrix.service }}:${{ github.sha }} to ECR"

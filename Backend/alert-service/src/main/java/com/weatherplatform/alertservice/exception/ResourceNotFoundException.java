@@ -1,0 +1,7 @@
+package com.weatherplatform.alertservice.exception;
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}

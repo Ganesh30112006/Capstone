@@ -1,0 +1,1073 @@
+openapi: 3.0.3
+info:
+  title: Device Service API
+  version: 2.0.0
+  description: |
+    Registry, provisioning, commanding, and firmware management for IoT weather
+    stations.
+
+    Authorization model: GET endpoints are open to any authenticated user;
+    every write is ADMIN-only. The API Gateway applies the same policy first,
+    and each controller re-checks it, so a gateway misconfiguration alone
+    cannot grant a USER write access to the fleet. The `/api/public/**`
+    endpoints are the only unauthenticated surface.
+
+    Every response is wrapped in the platform `ApiResponse` envelope.
+servers:
+  - url: http://localhost:8082
+    description: Direct service access (development only)
+  - url: http://localhost:8443
+    description: API Gateway (the only entry point clients should use)
+tags:
+  - name: Device Management
+    description: Registering and managing weather station devices
+  - name: Device Commands
+    description: The closed set of operations dispatched over AWS IoT Core
+  - name: Device Provisioning
+    description: AWS IoT X.509 identity for a station
+  - name: Firmware
+    description: Firmware catalogue and over-the-air updates
+  - name: Public Stations
+    description: Unauthenticated station directory for the public portal
+
+paths:
+  /api/devices:
+    get:
+      tags: [Device Management]
+      summary: List all registered devices
+      operationId: getAllDevices
+      responses:
+        '200':
+          description: All registered devices.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DeviceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Device Management]
+      summary: Register a new device
+      operationId: registerDevice
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceRegistrationRequest'
+            example:
+              deviceUid: ESP32-CHN-001
+              deviceName: North Ridge
+              locationName: North Ridge · 4,180 ft
+              latitude: 17.385
+              longitude: 78.4867
+              firmwareVersion: v2.8.4
+      responses:
+        '201':
+          description: Device registered successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DeviceResponse'
+        '400':
+          description: Invalid registration payload.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: A device with this UID already exists.
+
+  /api/devices/online:
+    get:
+      tags: [Device Management]
+      summary: List devices currently ONLINE
+      operationId: getOnlineDevices
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/devices/offline:
+    get:
+      tags: [Device Management]
+      summary: List devices currently OFFLINE
+      operationId: getOfflineDevices
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/devices/{deviceUid}:
+    parameters:
+      - $ref: '#/components/parameters/DeviceUid'
+    get:
+      tags: [Device Management]
+      summary: Get one device by UID
+      operationId: getDeviceByUid
+      responses:
+        '200':
+          $ref: '#/components/responses/SingleDevice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [Device Management]
+      summary: Update device details
+      operationId: updateDevice
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SingleDevice'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags: [Device Management]
+      summary: Remove a registered device
+      operationId: deleteDevice
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Device deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/status:
+    put:
+      tags: [Device Management]
+      summary: Change a device's lifecycle status
+      operationId: updateDeviceStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceStatusUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SingleDevice'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/health:
+    get:
+      tags: [Device Management]
+      summary: Connectivity and health summary for a device
+      operationId: getDeviceHealth
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Device health.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DeviceHealthResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/location:
+    parameters:
+      - $ref: '#/components/parameters/DeviceUid'
+    get:
+      tags: [Device Management]
+      summary: Get a device's coordinates and location name
+      operationId: getDeviceLocation
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceLocation'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      tags: [Device Management]
+      summary: Update a device's coordinates and location name
+      operationId: updateDeviceLocation
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceLocationUpdateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceLocation'
+        '400':
+          description: Latitude or longitude outside the permitted range.
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/devices/{deviceUid}/digital-twin:
+    get:
+      tags: [Device Management]
+      summary: Unified real-time state of a station
+      operationId: getDigitalTwin
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Digital twin state.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DigitalTwinResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/commands:
+    parameters:
+      - $ref: '#/components/parameters/DeviceUid'
+    get:
+      tags: [Device Commands]
+      summary: List the operations this platform supports
+      operationId: getSupportedCommands
+      security:
+        - bearerAuth: []
+      description: Lets a console render exactly the commands the backend accepts.
+      responses:
+        '200':
+          description: The complete permitted command set.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DeviceCommand'
+              example:
+                success: true
+                message: Supported commands retrieved
+                data: [PING, TELEMETRY_SYNC, REBOOT, OTA_CHECK]
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [Device Commands]
+      summary: Send one predefined operation to a station
+      operationId: sendDeviceCommand
+      security:
+        - bearerAuth: []
+      description: |
+        `command` is an enum, not free text: an unrecognised value fails JSON
+        binding and returns 400 before any dispatch code runs. There is no
+        shell execution, serial passthrough, or configuration injection path.
+
+        A `200` means the command was **published to the broker** — not that
+        the station has received, accepted, or executed it. Execution is
+        confirmed only by the station's next report.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceCommandRequest'
+            example:
+              command: PING
+      responses:
+        '200':
+          description: Command published to AWS IoT Core.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DeviceCommandResponse'
+        '400':
+          description: The command was absent or not one of the four supported values.
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/provisioning:
+    parameters:
+      - $ref: '#/components/parameters/DeviceUid'
+    post:
+      tags: [Device Provisioning]
+      summary: Issue an AWS IoT X.509 identity for a station
+      operationId: provisionDevice
+      security:
+        - bearerAuth: []
+      description: |
+        Creates the Thing, certificate, and least-privilege policy in AWS IoT
+        Core. The private key is returned **once** in this response and is
+        never stored by the platform; only the certificate id, ARN, and Thing
+        name are persisted.
+      responses:
+        '201':
+          description: Identity issued. Store the private key now — it cannot be retrieved again.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/DeviceProvisioningResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: This device already has an active certificate.
+    delete:
+      tags: [Device Provisioning]
+      summary: Revoke a station's AWS IoT identity
+      operationId: revokeDeviceProvisioning
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Certificate deactivated and detached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/firmware-update:
+    post:
+      tags: [Firmware]
+      summary: Request an OTA firmware update for a device
+      operationId: requestFirmwareUpdate
+      security:
+        - bearerAuth: []
+      description: Records the request and forwards it toward AWS IoT Core. The station applies it on its own schedule.
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirmwareUpdateRequest'
+            example:
+              firmwareVersion: v2.8.5
+      responses:
+        '201':
+          $ref: '#/components/responses/FirmwareUpdate'
+        '400':
+          description: firmwareVersion was missing or blank.
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/firmware-update/{updateId}/status:
+    patch:
+      tags: [Firmware]
+      summary: Update the progress of an in-flight OTA update
+      operationId: updateFirmwareUpdateStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+        - in: path
+          name: updateId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirmwareUpdateStatusRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/FirmwareUpdate'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/devices/{deviceUid}/firmware-history:
+    get:
+      tags: [Firmware]
+      summary: OTA update history for a device
+      operationId: getFirmwareHistory
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Update history, newest first.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/DeviceFirmwareUpdateResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/firmware:
+    get:
+      tags: [Firmware]
+      summary: List registered firmware releases
+      operationId: getAllFirmware
+      security:
+        - bearerAuth: []
+      description: The firmware catalogue is administrator-only in its entirety.
+      responses:
+        '200':
+          description: All registered releases.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/FirmwareResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      tags: [Firmware]
+      summary: Register a new firmware release
+      operationId: createFirmware
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FirmwareCreateRequest'
+            example:
+              version: v2.8.5
+              fileUrl: https://example-bucket.s3.amazonaws.com/firmware/v2.8.5.bin
+              checksum: 9f2c0d4e6b1a8c3f5d7e9b0a2c4e6f8a1b3d5f7091a2b3c4d5e6f708192a3b4c
+              fileSize: 1048576
+              releaseNotes: Adds oxygen sensor calibration.
+      responses:
+        '201':
+          description: Firmware created successfully.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/FirmwareResponse'
+        '400':
+          description: A required field was missing, or fileSize was not positive.
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/firmware/{version}:
+    get:
+      tags: [Firmware]
+      summary: Get one firmware release by version
+      operationId: getFirmwareByVersion
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: version
+          required: true
+          schema:
+            type: string
+          example: v2.8.5
+      responses:
+        '200':
+          description: Firmware metadata.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/FirmwareResponse'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/public/stations:
+    get:
+      tags: [Public Stations]
+      summary: Public station directory
+      operationId: listPublicStations
+      description: |
+        Unauthenticated. Deliberately narrower than the authenticated device
+        record: no battery, no firmware, no signal strength, no internal ids.
+      responses:
+        '200':
+          description: Publicly visible stations.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PublicStationResponse'
+
+  /api/public/stations/{stationId}:
+    get:
+      tags: [Public Stations]
+      summary: One publicly visible station
+      operationId: getPublicStation
+      parameters:
+        - $ref: '#/components/parameters/StationId'
+      responses:
+        '200':
+          description: Public station record.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PublicStationResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Issued by auth-service and verified at the API Gateway. ADMIN role required for every write.
+
+  parameters:
+    DeviceUid:
+      in: path
+      name: deviceUid
+      required: true
+      description: Unique device identifier.
+      schema:
+        type: string
+      example: ESP32-CHN-001
+    StationId:
+      in: path
+      name: stationId
+      required: true
+      description: Public station identifier.
+      schema:
+        type: string
+      example: STN-0427
+
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials, or the request did not arrive through the API Gateway.
+    Forbidden:
+      description: Authenticated, but this operation requires the ADMIN role.
+    NotFound:
+      description: No record exists for the supplied identifier.
+    DeviceList:
+      description: A list of devices.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DeviceResponse'
+    SingleDevice:
+      description: One device record.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/DeviceResponse'
+    DeviceLocation:
+      description: A device's location record.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/DeviceLocationResponse'
+    FirmwareUpdate:
+      description: An OTA update record.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ApiResponse'
+              - type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/DeviceFirmwareUpdateResponse'
+
+  schemas:
+    ApiResponse:
+      type: object
+      description: Envelope wrapped around every response this service returns.
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          description: Operation-specific payload.
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+
+    DeviceStatus:
+      type: string
+      enum: [ONLINE, OFFLINE, INACTIVE, MAINTENANCE]
+
+    DeviceCommand:
+      type: string
+      description: The complete set of operations a station accepts. Nothing outside this list can reach firmware.
+      enum: [PING, TELEMETRY_SYNC, REBOOT, OTA_CHECK]
+
+    FirmwareUpdateStatus:
+      type: string
+      enum: [PENDING, DOWNLOADING, INSTALLING, SUCCESS, FAILED, ROLLED_BACK]
+
+    DeviceResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        deviceUid:
+          type: string
+        deviceName:
+          type: string
+        locationName:
+          type: string
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        status:
+          $ref: '#/components/schemas/DeviceStatus'
+        batteryLevel:
+          type: integer
+          nullable: true
+        wifiSignalStrength:
+          type: integer
+          nullable: true
+        firmwareVersion:
+          type: string
+        lastSeenAt:
+          type: string
+          format: date-time
+          nullable: true
+        registeredAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    DeviceRegistrationRequest:
+      type: object
+      required: [deviceUid, deviceName, locationName]
+      properties:
+        deviceUid:
+          type: string
+          minLength: 3
+          maxLength: 100
+        deviceName:
+          type: string
+          minLength: 3
+          maxLength: 150
+        locationName:
+          type: string
+          minLength: 2
+          maxLength: 200
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        firmwareVersion:
+          type: string
+
+    DeviceUpdateRequest:
+      type: object
+      description: Every field is optional; omitted fields are left unchanged.
+      properties:
+        deviceName:
+          type: string
+          minLength: 3
+          maxLength: 150
+        locationName:
+          type: string
+          minLength: 2
+          maxLength: 200
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+
+    DeviceStatusUpdateRequest:
+      type: object
+      required: [status]
+      properties:
+        status:
+          $ref: '#/components/schemas/DeviceStatus'
+
+    DeviceHealthResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        status:
+          $ref: '#/components/schemas/DeviceStatus'
+        batteryLevel:
+          type: integer
+          nullable: true
+        wifiSignalStrength:
+          type: integer
+          nullable: true
+        firmwareVersion:
+          type: string
+        lastSeenAt:
+          type: string
+          format: date-time
+          nullable: true
+        healthy:
+          type: boolean
+        message:
+          type: string
+
+    DeviceLocationResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        locationName:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        updatedAt:
+          type: string
+          format: date-time
+
+    DeviceLocationUpdateRequest:
+      type: object
+      required: [latitude, longitude]
+      properties:
+        locationName:
+          type: string
+          minLength: 2
+          maxLength: 200
+        latitude:
+          type: number
+          format: double
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: double
+          minimum: -180
+          maximum: 180
+
+    DigitalTwinResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        deviceName:
+          type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              format: double
+            longitude:
+              type: number
+              format: double
+            name:
+              type: string
+        status:
+          type: string
+        firmware:
+          type: string
+        health:
+          type: object
+          properties:
+            battery:
+              type: integer
+            wifiSignal:
+              type: integer
+        sensors:
+          type: object
+          description: Keyed by sensor name.
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                type: number
+                format: double
+              status:
+                type: string
+
+    DeviceCommandRequest:
+      type: object
+      required: [command]
+      properties:
+        command:
+          $ref: '#/components/schemas/DeviceCommand'
+
+    DeviceCommandResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        command:
+          $ref: '#/components/schemas/DeviceCommand'
+        commandId:
+          type: string
+          description: Correlates this dispatch with the status event the device sends back.
+        status:
+          type: string
+          description: Always PUBLISHED — the broker accepted it; the device has not necessarily executed it.
+          example: PUBLISHED
+        topic:
+          type: string
+        issuedAt:
+          type: string
+          format: date-time
+
+    DeviceProvisioningResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        thingName:
+          type: string
+        certificateId:
+          type: string
+        certificateArn:
+          type: string
+        certificatePem:
+          type: string
+          description: PEM-encoded device certificate.
+        privateKey:
+          type: string
+          description: Returned once and never stored by the platform.
+        mqttEndpoint:
+          type: string
+        telemetryTopic:
+          type: string
+        heartbeatTopic:
+          type: string
+        otaTopic:
+          type: string
+        provisionedAt:
+          type: string
+          format: date-time
+        warning:
+          type: string
+
+    FirmwareResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        version:
+          type: string
+        fileUrl:
+          type: string
+        checksum:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+        releaseNotes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    FirmwareCreateRequest:
+      type: object
+      required: [version, fileUrl, checksum, fileSize]
+      properties:
+        version:
+          type: string
+        fileUrl:
+          type: string
+        checksum:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+          minimum: 1
+        releaseNotes:
+          type: string
+
+    FirmwareUpdateRequest:
+      type: object
+      required: [firmwareVersion]
+      properties:
+        firmwareVersion:
+          type: string
+
+    FirmwareUpdateStatusRequest:
+      type: object
+      required: [status]
+      properties:
+        status:
+          $ref: '#/components/schemas/FirmwareUpdateStatus'
+        errorMessage:
+          type: string
+
+    DeviceFirmwareUpdateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        deviceUid:
+          type: string
+        firmwareVersion:
+          type: string
+        status:
+          $ref: '#/components/schemas/FirmwareUpdateStatus'
+        startedAt:
+          type: string
+          format: date-time
+          nullable: true
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+        errorMessage:
+          type: string
+          nullable: true
+
+    PublicStationResponse:
+      type: object
+      description: The public projection of a station. Carries no device internals.
+      properties:
+        stationId:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        status:
+          $ref: '#/components/schemas/DeviceStatus'
+        lastReportedAt:
+          type: string
+          format: date-time
+          nullable: true

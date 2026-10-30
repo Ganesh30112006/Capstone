@@ -1,0 +1,190 @@
+server:
+  port: ${GATEWAY_PORT:8443}
+  shutdown: graceful
+  forward-headers-strategy: framework
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 15s
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000,http://localhost:4173}
+            allowedMethods: GET,POST,PUT,PATCH,DELETE,OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders: X-Correlation-ID
+            allowCredentials: true
+            maxAge: 3600
+      routes:
+        # ---------------- Public (unauthenticated) projections ----------------
+        - id: public-stations
+          uri: ${DEVICE_SERVICE_URL:http://localhost:8080}
+          predicates:
+            - Path=/api/public/stations/**
+        - id: public-readings
+          uri: ${SENSOR_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/public/readings/**
+        - id: public-environment
+          uri: ${ANALYTICS_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/public/environment/**
+        - id: public-forecasts
+          uri: ${AI_SERVICE_URL:http://localhost:8000}
+          predicates:
+            - Path=/api/public/forecasts/**
+
+        # ---------------- Authenticated service routes ----------------
+        - id: auth-service
+          uri: ${AUTH_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/auth/**
+        - id: user-service
+          uri: ${AUTH_SERVICE_URL:http://localhost:8083}
+          predicates:
+            - Path=/api/users/**
+        - id: device-service
+          uri: ${DEVICE_SERVICE_URL:http://localhost:8080}
+          predicates:
+            - Path=/api/devices/**
+        - id: firmware-service
+          uri: ${DEVICE_SERVICE_URL:http://localhost:8080}
+          predicates:
+            - Path=/api/firmware/**
+        - id: sensor-service
+          uri: ${SENSOR_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/sensors/**
+        - id: analytics-service
+          uri: ${ANALYTICS_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/analytics/**
+        - id: report-service
+          uri: ${ANALYTICS_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/reports/**
+        - id: alert-service
+          uri: ${ALERT_SERVICE_URL:http://localhost:8085}
+          predicates:
+            - Path=/api/alerts/**
+        - id: ai-service
+          uri: ${AI_SERVICE_URL:http://localhost:8000}
+          predicates:
+            - Path=/api/ai/**
+        - id: iot-stream-service
+          uri: ${IOT_STREAM_SERVICE_URL:http://localhost:8087}
+          predicates:
+            - Path=/api/stream/**
+        # Live telemetry WebSocket. The gateway upgrades the connection and
+        # forwards the verified identity; the browser never reaches a device.
+        - id: iot-stream-websocket
+          uri: ${IOT_STREAM_WS_URL:ws://localhost:8087}
+          predicates:
+            - Path=/ws/**
+
+jwt:
+  secret: ${JWT_SECRET} # Injected from the environment / AWS Secrets Manager. Never defaulted.
+
+gateway:
+  security:
+    # Shared secret proving a request was proxied by the gateway. Defence in
+    # depth behind private networking — services reject direct calls without it.
+    internal-secret: ${GATEWAY_INTERNAL_SECRET}
+    public-paths:
+      - "POST /api/auth/login"
+      - "POST /api/auth/register"
+      - "GET /api/public/**"
+      - "GET /actuator/health"
+      - "GET /actuator/health/**"
+      - "GET /actuator/info"
+    admin-paths:
+      # Device fleet mutations
+      - "POST /api/devices"
+      - "PUT /api/devices/**"
+      - "PATCH /api/devices/**"
+      - "DELETE /api/devices/**"
+      - "POST /api/devices/*/firmware-update"
+      - "POST /api/devices/*/commands"
+      - "GET /api/devices/*/provisioning"
+      - "POST /api/devices/*/provisioning"
+      # Sensor calibration changes how every later reading is corrected
+      - "POST /api/sensors/*/calibrations"
+      # Firmware / OTA catalogue
+      - "* /api/firmware/**"
+      # Alert configuration and triage
+      - "POST /api/alerts/rules/**"
+      - "PUT /api/alerts/rules/**"
+      - "DELETE /api/alerts/rules/**"
+      - "PATCH /api/alerts/*/status"
+      # Platform administration
+      - "* /api/users/**"
+      - "* /api/system/**"
+      - "POST /api/ai/train"
+      # Live streaming branch (admin console only)
+      - "GET /api/stream/**"
+      - "GET /ws/**"
+
+  health:
+    timeout-ms: ${HEALTH_PROBE_TIMEOUT_MS:2000}
+    services:
+      Authentication: ${AUTH_SERVICE_URL:http://localhost:8083}/actuator/health
+      Device Registry: ${DEVICE_SERVICE_URL:http://localhost:8080}/actuator/health
+      Sensor Telemetry: ${SENSOR_SERVICE_URL:http://localhost:8081}/actuator/health
+      Analytics: ${ANALYTICS_SERVICE_URL:http://localhost:8084}/actuator/health
+      Alerting: ${ALERT_SERVICE_URL:http://localhost:8085}/actuator/health
+      IoT Ingestion: ${IOT_INGESTION_SERVICE_URL:http://localhost:8086}/actuator/health
+      AI Inference: ${AI_SERVICE_URL:http://localhost:8000}/health
+      Live Stream: ${IOT_STREAM_SERVICE_URL:http://localhost:8087}/actuator/health
+
+  ratelimit:
+    auth:
+      capacity: ${RATELIMIT_AUTH_CAPACITY:10}
+      refill-per-second: ${RATELIMIT_AUTH_REFILL:1}
+    report:
+      capacity: ${RATELIMIT_REPORT_CAPACITY:20}
+      refill-per-second: ${RATELIMIT_REPORT_REFILL:2}
+    public:
+      capacity: ${RATELIMIT_PUBLIC_CAPACITY:120}
+      refill-per-second: ${RATELIMIT_PUBLIC_REFILL:20}
+    default:
+      capacity: ${RATELIMIT_DEFAULT_CAPACITY:200}
+      refill-per-second: ${RATELIMIT_DEFAULT_REFILL:20}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    tags:
+      application: api-gateway
+
+logging:
+  level:
+    root: INFO
+    com.weatherplatform.gateway: INFO
+    org.springframework.cloud.gateway: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+logging:
+  level:
+    com.weatherplatform.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG

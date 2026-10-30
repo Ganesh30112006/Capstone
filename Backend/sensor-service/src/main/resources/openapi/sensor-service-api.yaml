@@ -1,0 +1,926 @@
+openapi: 3.0.3
+info:
+  title: Sensor Service API
+  version: 2.0.0
+  description: |
+    Read contracts for environmental sensor measurements.
+
+    This service has no HTTP write path. Readings arrive over RabbitMQ from
+    iot-ingestion-service (queue `iot.telemetry.received`) and are stored
+    idempotently on `messageId`; there is deliberately no endpoint a client can
+    use to post a reading, so no caller can forge telemetry for a station.
+
+    Every response is wrapped in the platform `ApiResponse` envelope. Paths
+    below are as served by the service; through the API Gateway they carry the
+    same shape.
+servers:
+  - url: http://localhost:8081
+    description: Direct service access (development only)
+  - url: http://localhost:8443
+    description: API Gateway (the only entry point clients should use)
+tags:
+  - name: Sensor Data
+    description: Authenticated device measurements and diagnostics
+  - name: Public Readings
+    description: Unauthenticated readings for the public portal
+paths:
+  /api/sensors/{deviceUid}/latest:
+    get:
+      tags: [Sensor Data]
+      summary: Get the latest reading for a device
+      operationId: getLatestSensorData
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Latest reading found.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SensorDataResponse'
+              example:
+                success: true
+                message: Latest reading retrieved successfully
+                data:
+                  id: 781
+                  deviceUid: ESP32-CHN-001
+                  temperature: 31.2
+                  humidity: 72.4
+                  airQuality: 118
+                  pressure: 1008.42
+                  rain: false
+                  oxygen: 20.9
+                  latitude: 17.385
+                  longitude: 78.4867
+                  recordedAt: "2026-08-06T09:30:00"
+                  createdAt: "2026-08-06T09:30:02"
+                timestamp: "2026-08-06T09:30:05"
+                path: /api/sensors/ESP32-CHN-001/latest
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/sensors/latest:
+    get:
+      tags: [Sensor Data]
+      summary: Get the latest reading for several devices at once
+      operationId: getLatestSensorDataBatch
+      description: |
+        Most recent measurement for each requested device, keyed by device UID.
+
+        This exists so that rendering a fleet costs one request rather than one
+        per station: the console previously issued `GET /api/devices` followed
+        by `GET /api/sensors/{deviceUid}/latest` once per device, so a
+        500-station deployment made 501 round trips to draw a single page.
+
+        A device that has never reported is **absent from the map**, not present
+        with a null or zeroed reading, so a caller can distinguish "this station
+        has not reported" from "this station reported zero".
+      parameters:
+        - in: query
+          name: deviceUids
+          required: true
+          description: Comma-separated device UIDs. At most 500 per request.
+          schema:
+            type: array
+            maxItems: 500
+            items:
+              type: string
+          example: [ESP32-CHN-001, ESP32-CHN-002]
+      responses:
+        '200':
+          description: Readings retrieved. Devices with no reading are omitted.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        additionalProperties:
+                          $ref: '#/components/schemas/SensorDataResponse'
+              example:
+                success: true
+                message: Latest readings retrieved successfully
+                data:
+                  ESP32-CHN-001:
+                    id: 781
+                    deviceUid: ESP32-CHN-001
+                    temperature: 31.2
+                    humidity: 72.4
+                    airQuality: 118
+                    pressure: 1008.42
+                    rain: false
+                    oxygen: 20.9
+                    recordedAt: "2026-08-06T09:30:00"
+                timestamp: "2026-08-06T09:30:05"
+                path: /api/sensors/latest
+        '400':
+          description: More than 500 device UIDs were requested.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/sensors/{deviceUid}/history:
+    get:
+      tags: [Sensor Data]
+      summary: Get paginated historical readings for a device
+      operationId: getSensorHistory
+      description: |
+        Supplying either `from` or `to` switches the query to a date-bounded
+        search; omitting both returns the most recent page.
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+        - in: query
+          name: from
+          required: false
+          description: Inclusive start of the window, ISO-8601 local date-time.
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: to
+          required: false
+          description: Inclusive end of the window, ISO-8601 local date-time.
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - in: query
+          name: size
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 20
+      responses:
+        '200':
+          description: Historical readings returned.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PagedSensorDataResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/sensors/{deviceUid}/statistics:
+    get:
+      tags: [Sensor Data]
+      summary: Get aggregate statistics for a device
+      operationId: getSensorStatistics
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Aggregates across the stored readings for this device.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SensorStatisticsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/sensors/health:
+    get:
+      tags: [Sensor Data]
+      summary: Get sensor diagnostics for several devices at once
+      operationId: getSensorHealthBatch
+      description: |
+        Per-sensor diagnostics for each requested device, keyed by device UID.
+
+        The companion to `/api/sensors/latest`. The admin console previously
+        issued one `GET /api/sensors/{deviceUid}/health` per station, so its
+        sensor page cost a round trip per station on top of the reading fetch.
+
+        A device with no diagnostics on file is **absent from the map**, not
+        present with an empty report. An empty report would carry
+        `overallStatus: HEALTHY` and no failing probes, which reads as "every
+        probe passed" when the truth is "nothing has ever been evaluated".
+      parameters:
+        - in: query
+          name: deviceUids
+          required: true
+          description: Comma-separated device UIDs. At most 500 per request.
+          schema:
+            type: array
+            maxItems: 500
+            items:
+              type: string
+          example: [ESP32-CHN-001, ESP32-CHN-002]
+      responses:
+        '200':
+          description: Diagnostics retrieved. Never-evaluated devices are omitted.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        additionalProperties:
+                          $ref: '#/components/schemas/SensorHealthResponse'
+              example:
+                success: true
+                message: Sensor health retrieved successfully
+                data:
+                  ESP32-CHN-001:
+                    deviceUid: ESP32-CHN-001
+                    overallStatus: WARNING
+                    sensors:
+                      HUMIDITY:
+                        status: WARNING
+                        details: Calibration drift detected
+                        lastUpdated: "2026-08-06T09:30:00"
+                    lastCheckedAt: "2026-08-06T09:30:00"
+                path: /api/sensors/health
+        '400':
+          description: More than 500 device UIDs were requested.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/sensors/{deviceUid}/health:
+    get:
+      tags: [Sensor Data]
+      summary: Get per-sensor diagnostic health for a device
+      operationId: getSensorHealth
+      description: |
+        Also served at `/api/sensors/device/{deviceUid}/health`; both paths are
+        handled by the same operation and return the same payload.
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Health status per sensor.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/SensorHealthResponse'
+              example:
+                success: true
+                message: Sensor health retrieved successfully
+                data:
+                  deviceUid: ESP32-CHN-001
+                  overallStatus: WARNING
+                  sensors:
+                    temperature:
+                      status: HEALTHY
+                      details: Sensor functioning within normal tolerances
+                      lastUpdated: "2026-08-06T09:30:00"
+                      condition: NONE
+                      lastHealthyAt: "2026-08-06T09:30:00"
+                      flatlined: false
+                      flatlineSince: null
+                      expectedMin: -40.0
+                      expectedMax: 75.0
+                      health:
+                        percent: 98.4
+                        passed: 85020
+                        warned: 1382
+                        failed: 0
+                        windowStart: "2026-08-05T10:00:00"
+                      calibration:
+                        status: VALID
+                        lastCalibratedAt: "2026-07-23T08:00:00"
+                        validUntil: "2027-01-19T08:00:00"
+                        offset: -0.180
+                        driftEstimate: 0.120
+                        driftBaselineFrom: "2026-06-25T08:00:00"
+                    humidity:
+                      status: WARNING
+                      details: Value 61.20 has not changed since 2026-08-06T09:24:10
+                      lastUpdated: "2026-08-06T09:30:00"
+                      condition: FLATLINE
+                      lastHealthyAt: "2026-08-06T09:24:09"
+                      flatlined: true
+                      flatlineSince: "2026-08-06T09:24:10"
+                      expectedMin: 0.0
+                      expectedMax: 100.0
+                      health: null
+                      calibration:
+                        status: NOT_CALIBRATED
+                  lastCheckedAt: "2026-08-06T09:30:05"
+                path: /api/sensors/device/ESP32-CHN-001/health
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /api/public/readings/latest:
+    get:
+      tags: [Public Readings]
+      summary: Latest reading for each of several stations
+      operationId: getPublicLatestForEach
+      security: []
+      description: |
+        Unauthenticated. The newest reading of each listed station, keyed by
+        station id, in one query. A station that has never reported is absent
+        from the map rather than present with an empty reading. Cached for two
+        seconds.
+      parameters:
+        - in: query
+          name: stationIds
+          required: true
+          description: Comma-separated station ids, 1 to 100.
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+      responses:
+        '200':
+          description: Latest reading per station.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        additionalProperties:
+                          $ref: '#/components/schemas/PublicReadingResponse'
+        '400':
+          description: No station ids, or more than 100.
+
+  /api/public/readings/{stationId}/latest:
+    get:
+      tags: [Public Readings]
+      summary: Latest reading for a publicly visible station
+      operationId: getPublicLatestReading
+      description: |
+        Unauthenticated. Deliberately narrower than the authenticated payload:
+        no record id, no battery, no firmware, no device internals.
+        Cached for 30 seconds.
+      parameters:
+        - $ref: '#/components/parameters/StationId'
+      responses:
+        '200':
+          description: Latest public reading.
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              example: max-age=30, public
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/PublicReadingResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/public/readings/{stationId}/history:
+    get:
+      tags: [Public Readings]
+      summary: Recent public readings for a station
+      operationId: getPublicReadingHistory
+      parameters:
+        - $ref: '#/components/parameters/StationId'
+        - in: query
+          name: hours
+          required: false
+          description: Look-back window in hours. Values outside 1–168 are rejected with 400.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 168
+            default: 24
+      responses:
+        '200':
+          description: Readings within the requested window.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/PublicReadingResponse'
+        '400':
+          description: The `hours` parameter was outside the permitted 1–168 range.
+
+  /api/sensors/{deviceUid}/calibrations:
+    get:
+      tags: [Calibration]
+      summary: Calibration history for a device
+      operationId: getCalibrationHistory
+      description: |
+        Every calibration of the device's sensors, newest first. Only the newest
+        record per sensor is in force; every older one is reported SUPERSEDED.
+        An empty list is an answer: the device has never been calibrated.
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      responses:
+        '200':
+          description: Calibration records, newest first.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/CalibrationResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      tags: [Calibration]
+      summary: Record a calibration
+      operationId: recordCalibration
+      description: |
+        Pairs a reference instrument's reading with the sensor's own, and from
+        then on adds the difference to every raw reading of that sensor:
+
+            raw value -> + offset -> corrected value
+            offset    =  referenceValue - sensorValue
+
+        The offset is computed, never supplied. Send only `referenceValue` to
+        pair it with the sensor's latest raw reading, which must be under five
+        minutes old. To record a calibration done earlier, send `calibratedAt`
+        and `sensorValue` together. Admin only.
+      parameters:
+        - $ref: '#/components/parameters/DeviceUid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalibrationRequest'
+            example:
+              sensorType: temperature
+              referenceValue: 25.30
+              notes: Checked against a Fluke 971 beside the enclosure
+      responses:
+        '201':
+          description: Recorded; the offset applies to readings from now on.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/CalibrationResponse'
+        '400':
+          description: The request body is malformed or a required field is missing.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: No reading has ever been received from this device.
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+components:
+  parameters:
+    DeviceUid:
+      in: path
+      name: deviceUid
+      required: true
+      description: Unique device identifier.
+      schema:
+        type: string
+      example: ESP32-CHN-001
+    StationId:
+      in: path
+      name: stationId
+      required: true
+      description: Public station identifier.
+      schema:
+        type: string
+      example: STN-0427
+
+  responses:
+    Unauthorized:
+      description: Missing or invalid credentials, or the request did not arrive through the API Gateway.
+    NotFound:
+      description: No record exists for the supplied identifier.
+    Forbidden:
+      description: Authenticated, but the operation requires the ADMIN role.
+    UnprocessableEntity:
+      description: |
+        Well-formed but not acceptable as given: a sensor type that cannot be
+        calibrated, an offset beyond the type's plausible limit, a date in the
+        future, or no recent reading to pair the reference with. Retrying the
+        same request will not change the answer.
+
+  schemas:
+    ApiResponse:
+      type: object
+      description: Envelope wrapped around every response this service returns.
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          description: Operation-specific payload.
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
+
+    SensorDataResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        deviceUid:
+          type: string
+        temperature:
+          type: number
+          format: double
+          description: Degrees Celsius.
+        humidity:
+          type: number
+          format: double
+          description: Relative humidity, percent.
+        airQuality:
+          type: integer
+          format: int32
+          description: AQI.
+        pressure:
+          type: number
+          format: double
+          description: hPa.
+        rain:
+          type: boolean
+        oxygen:
+          type: number
+          format: double
+          description: Ambient concentration, percent.
+        latitude:
+          type: number
+          format: double
+          nullable: true
+        longitude:
+          type: number
+          format: double
+          nullable: true
+        recordedAt:
+          type: string
+          format: date-time
+          description: When the station took the measurement, UTC.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the platform stored it, UTC.
+        rawTemperature:
+          type: number
+          format: double
+          description: |
+            What the sensor reported before calibration; `temperature` is the
+            corrected value. The raw fields are omitted on readings stored before
+            calibration existed, whose main values are already the raw ones.
+        rawHumidity:
+          type: number
+          format: double
+        rawAirQuality:
+          type: integer
+          format: int32
+        rawPressure:
+          type: number
+          format: double
+        rawOxygen:
+          type: number
+          format: double
+
+    PagedSensorDataResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/SensorDataResponse'
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+        last:
+          type: boolean
+
+    SensorStatisticsResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        totalReadings:
+          type: integer
+          format: int64
+        avgTemperature:
+          type: number
+          format: double
+        minTemperature:
+          type: number
+          format: double
+        maxTemperature:
+          type: number
+          format: double
+        avgHumidity:
+          type: number
+          format: double
+        minHumidity:
+          type: number
+          format: double
+        maxHumidity:
+          type: number
+          format: double
+        avgAirQuality:
+          type: number
+          format: double
+        minAirQuality:
+          type: integer
+          format: int32
+        maxAirQuality:
+          type: integer
+          format: int32
+        avgPressure:
+          type: number
+          format: double
+        minPressure:
+          type: number
+          format: double
+        maxPressure:
+          type: number
+          format: double
+
+    SensorHealthResponse:
+      type: object
+      properties:
+        deviceUid:
+          type: string
+        overallStatus:
+          $ref: '#/components/schemas/SensorOverallStatus'
+        sensors:
+          type: object
+          description: Keyed by sensor type -- temperature, humidity, airQuality, pressure, oxygen.
+          additionalProperties:
+            $ref: '#/components/schemas/SensorStatusDetail'
+        lastCheckedAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: |
+            When the most recent check on this device ran. Null when no check
+            has run: it dates the diagnostics, not the request that read them.
+
+    SensorStatusDetail:
+      type: object
+      description: Every field after `lastUpdated` is nullable, and null always means "not known".
+      properties:
+        status:
+          $ref: '#/components/schemas/SensorStatus'
+        details:
+          type: string
+        lastUpdated:
+          type: string
+          format: date-time
+        condition:
+          type: string
+          nullable: true
+          enum: [NONE, MISSING, OUT_OF_RANGE, RAPID_CHANGE, FLATLINE]
+          description: Which check decided the status. Null on records written before conditions were tracked.
+        lastHealthyAt:
+          type: string
+          format: date-time
+          nullable: true
+          description: The last reading that passed every check.
+        flatlined:
+          type: boolean
+          nullable: true
+          description: Null when the condition was never recorded, rather than a false it cannot vouch for.
+        flatlineSince:
+          type: string
+          format: date-time
+          nullable: true
+        expectedMin:
+          type: number
+          format: double
+          nullable: true
+        expectedMax:
+          type: number
+          format: double
+          nullable: true
+        health:
+          $ref: '#/components/schemas/HealthScore'
+        calibration:
+          $ref: '#/components/schemas/CalibrationSummary'
+
+    HealthScore:
+      type: object
+      nullable: true
+      description: |
+        The share of the sensor's evaluations over the last 24 hours that passed
+        every check, with the counts it is computed from. A pass rate, not a
+        weighted composite. Null when the sensor had no evaluations in the
+        window: 0 of 0 is not a score.
+      properties:
+        percent:
+          type: number
+          format: double
+          description: Rounded down to one decimal, so only a sensor with no failures reads 100.
+        passed:
+          type: integer
+        warned:
+          type: integer
+        failed:
+          type: integer
+          description: Failure count over the window.
+        windowStart:
+          type: string
+          format: date-time
+          description: Start of the oldest hour counted.
+
+    CalibrationSummary:
+      type: object
+      nullable: true
+      description: Null for sensors that cannot be calibrated.
+      properties:
+        status:
+          $ref: '#/components/schemas/CalibrationStatus'
+        lastCalibratedAt:
+          type: string
+          format: date-time
+          nullable: true
+        validUntil:
+          type: string
+          format: date-time
+          nullable: true
+        offset:
+          type: number
+          format: double
+          nullable: true
+          description: Added to every raw reading while this calibration is in force.
+        driftEstimate:
+          type: number
+          format: double
+          nullable: true
+          description: |
+            Estimated drift since the last calibration, in the sensor's units;
+            positive means it now reads higher. Extrapolated from how the offset
+            moved between the last two calibrations. Null unless two calibrations
+            at least seven days apart exist.
+        driftBaselineFrom:
+          type: string
+          format: date-time
+          nullable: true
+          description: The earlier calibration the drift rate was measured from.
+
+    CalibrationStatus:
+      type: string
+      description: |
+        `NOT_CALIBRATED` -- no record; unchecked, which is not the same as accurate.
+        `VALID` / `DUE_SOON` -- in force, and expiring within 14 days for DUE_SOON.
+        `EXPIRED` -- past its validity; its offset is still applied until replaced.
+        `SUPERSEDED` -- history only: a newer calibration of the sensor exists.
+      enum: [NOT_CALIBRATED, VALID, DUE_SOON, EXPIRED, SUPERSEDED]
+
+    CalibrationRequest:
+      type: object
+      required: [sensorType, referenceValue]
+      properties:
+        sensorType:
+          type: string
+          enum: [temperature, humidity, airQuality, pressure, oxygen]
+        referenceValue:
+          type: number
+          format: double
+          description: What the reference instrument read.
+        sensorValue:
+          type: number
+          format: double
+          description: |
+            What the sensor read at the same moment, uncorrected. Omit to use the
+            sensor's latest raw reading. Required when calibratedAt is given.
+        calibratedAt:
+          type: string
+          format: date-time
+          description: When the calibration was done, UTC. Defaults to now; may not be in the future.
+        notes:
+          type: string
+          maxLength: 500
+
+    CalibrationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        deviceUid:
+          type: string
+        sensorType:
+          type: string
+        referenceValue:
+          type: number
+          format: double
+        sensorValue:
+          type: number
+          format: double
+        offset:
+          type: number
+          format: double
+          description: referenceValue - sensorValue.
+        calibratedAt:
+          type: string
+          format: date-time
+        validUntil:
+          type: string
+          format: date-time
+        performedBy:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/CalibrationStatus'
+
+    SensorStatus:
+      type: string
+      description: The outcome of a diagnostic check that actually ran.
+      enum: [HEALTHY, WARNING, FAILED]
+
+    SensorOverallStatus:
+      type: string
+      description: |
+        Worst per-probe status on the device, or `UNKNOWN` when the device has
+        no diagnostics on file. `UNKNOWN` is deliberately not `HEALTHY`: no
+        check has run, so no check has passed.
+      enum: [HEALTHY, WARNING, FAILED, UNKNOWN]
+
+    PublicReadingResponse:
+      type: object
+      description: The public projection of a reading. Carries no device internals.
+      properties:
+        stationId:
+          type: string
+        temperature:
+          type: number
+          format: double
+        humidity:
+          type: number
+          format: double
+        airQuality:
+          type: integer
+          format: int32
+        oxygen:
+          type: number
+          format: double
+        pressure:
+          type: number
+          format: double
+        rain:
+          type: boolean
+        recordedAt:
+          type: string
+          format: date-time
+          description: UTC.

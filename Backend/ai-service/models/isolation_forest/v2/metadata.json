@@ -1,0 +1,19 @@
+{
+    "model_name": "IsolationForest_Anomaly",
+    "version": "2.0",
+    "training_timestamp": "2026-09-13T13:42:16.515072+00:00",
+    "features": [
+        "temperature",
+        "humidity",
+        "airQuality",
+        "oxygen",
+        "pressure"
+    ],
+    "hyperparameters": {
+        "contamination": 0.03
+    },
+    "metrics": {
+        "is_synthetic": true,
+        "samples_trained": 500
+    }
+}

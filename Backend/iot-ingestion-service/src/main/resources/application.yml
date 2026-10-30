@@ -1,0 +1,81 @@
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  application:
+    name: iot-ingestion-service
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    connection-timeout: 10s
+    template:
+      retry:
+        enabled: true
+        max-attempts: 4
+        initial-interval: 500ms
+        multiplier: 2.0
+        max-interval: 5s
+
+  cloud:
+    aws:
+      region:
+        static: ${AWS_REGION:us-east-1}
+      credentials:
+        # Left empty against real AWS so the ECS task role is used instead.
+        # Only populated for the LocalStack emulator in local development.
+        access-key: ${AWS_ACCESS_KEY_ID:}
+        secret-key: ${AWS_SECRET_ACCESS_KEY:}
+      sqs:
+        endpoint: ${AWS_SQS_ENDPOINT:}
+
+server:
+  port: ${IOT_INGESTION_PORT:8086}
+  shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: iot-ingestion-service
+
+iot:
+  sqs:
+    telemetry-queue: ${SQS_TELEMETRY_QUEUE:iot-telemetry-queue}
+    heartbeat-queue: ${SQS_HEARTBEAT_QUEUE:iot-heartbeat-queue}
+    max-concurrent-messages: ${SQS_MAX_CONCURRENT:10}
+    poll-timeout-seconds: ${SQS_POLL_TIMEOUT_SECONDS:10}
+  validation:
+    # Tolerance for a device whose clock runs fast.
+    max-clock-skew-minutes: ${IOT_MAX_CLOCK_SKEW_MINUTES:15}
+    # Replay guard: a device flushing a backlog after an outage is legitimate,
+    # but beyond this a reading is too stale to fold into history.
+    max-message-age-days: ${IOT_MAX_MESSAGE_AGE_DAYS:7}
+  dedupe:
+    retention-seconds: ${IOT_DEDUPE_RETENTION_SECONDS:300}
+    max-entries: ${IOT_DEDUPE_MAX_ENTRIES:100000}
+
+logging:
+  level:
+    root: INFO
+    com.weatherplatform.iotingestion: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] [%X{correlationId}] %-5level %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+logging:
+  level:
+    com.weatherplatform.iotingestion: DEBUG

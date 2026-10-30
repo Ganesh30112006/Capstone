@@ -1,0 +1,21 @@
+fastapi==0.109.2
+# Starlette 0.36's TestClient calls httpx.Client(app=...), which httpx 0.28 removed.
+httpx>=0.27,<0.28
+# [standard] pulls in uvloop and httptools: a faster event loop and a C HTTP
+# parser, which is most of the per-request overhead this service does not spend
+# inside a model. Keep the worker count at 1 — each worker process would start
+# its own copy of both RabbitMQ consumers and publish duplicate anomaly events.
+uvicorn[standard]==0.27.1
+pydantic==2.6.1
+scikit-learn==1.4.0
+joblib==1.3.2
+chronos-forecasting[extras]>=2.2
+prometheus-client==0.19.0
+pika==1.3.2
+# Response encoding. /api/ai/reports and /api/ai/predictions return one nested
+# document per tracked device, where the standard encoder is a visible share of
+# the response time. Optional: main.py falls back if it is absent.
+orjson==3.9.15
+# Forecast receipts are kept in PostgreSQL (receipt_store.py) so the AI scorecard
+# survives restarts. Optional at runtime: without it the ledger stays in memory.
+psycopg[binary]>=3.1

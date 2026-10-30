@@ -1,0 +1,6 @@
+CREATE DATABASE auth_db;
+CREATE DATABASE device_db;
+CREATE DATABASE sensor_db;
+CREATE DATABASE analytics_db;
+CREATE DATABASE alert_db;
+CREATE DATABASE ai_db;

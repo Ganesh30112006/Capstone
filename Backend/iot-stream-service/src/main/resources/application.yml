@@ -1,0 +1,92 @@
+server:
+  port: ${IOT_STREAM_PORT:8087}
+  shutdown: graceful
+
+spring:
+  application:
+    name: iot-stream-service
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        acknowledge-mode: auto
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          initial-interval: 2s
+          max-attempts: 3
+          multiplier: 2
+
+iot:
+  stream:
+    # aws  -> subscribe directly to AWS IoT Core over MQTT/WSS (production)
+    # rabbit -> consume the SQS branch's bus events instead (local/CI, default)
+    source: ${IOT_STREAM_SOURCE:rabbit}
+    topic-prefix: ${IOT_TOPIC_PREFIX:weather/devices}
+    allowed-origins: ${IOT_STREAM_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:4173}
+    aws:
+      endpoint: ${AWS_IOT_ENDPOINT:}
+      region: ${AWS_REGION:us-east-1}
+      client-id: ${IOT_STREAM_CLIENT_ID:iot-stream-service}
+      topic-filters:
+        - ${IOT_TOPIC_PREFIX:weather/devices}/+/telemetry
+        - ${IOT_TOPIC_PREFIX:weather/devices}/+/heartbeat
+    fanout:
+      # Off: the AI engine consumes the backend branch (sensor.reading.created),
+      # not this one. This branch exists to show readings, that one exists to
+      # reason about them. Left on, every frame published here is unroutable and
+      # comes straight back as a warning — the same way heartbeats did.
+      publish-to-rabbit: ${IOT_STREAM_PUBLISH_TO_RABBIT:false}
+      broadcast-to-web-socket: ${IOT_STREAM_BROADCAST_WS:true}
+      forward-ai-events: ${IOT_STREAM_FORWARD_AI:true}
+    web-socket:
+      per-session-buffer-limit: 256
+      send-timeout-ms: 5000
+      max-sessions: ${IOT_STREAM_MAX_SESSIONS:500}
+
+jwt:
+  secret: ${JWT_SECRET:}
+  internal-secret: ${GATEWAY_INTERNAL_SECRET:}
+  # Leave false behind the gateway. Set true only for local browser testing
+  # straight against this service with an ?access_token= parameter.
+  allow-direct-token-handshake: ${IOT_STREAM_ALLOW_DIRECT_HANDSHAKE:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: iot-stream-service
+
+logging:
+  level:
+    root: INFO
+    com.weatherplatform.iotstream: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+iot:
+  stream:
+    allowed-origins: "*"
+jwt:
+  allow-direct-token-handshake: true
+logging:
+  level:
+    com.weatherplatform.iotstream: DEBUG

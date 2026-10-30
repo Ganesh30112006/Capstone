@@ -1,0 +1,292 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # Infrastructure
+  # ----------------------------------------------------
+  postgres:
+    image: postgres:15-alpine
+    container_name: weather-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: weather-rabbitmq
+    # RabbitMQ derives its node name from the hostname, and Docker assigns a new
+    # hostname on every recreate. Without pinning it the broker comes up as a
+    # different node, finds no database under its own name and starts empty,
+    # while the previous node's data sits orphaned on the volume beside it --
+    # queues and dead-lettered messages both. The volume alone does not survive
+    # a recreate; the volume plus a stable node identity does.
+    hostname: weather-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    env_file:
+      - .env
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    # Without this the broker keeps everything in the container filesystem, so a
+    # recreate discards durable queues and, with them, whatever is sitting in the
+    # dead-letter queues. Those queues exist to hold the evidence of a failure
+    # until someone can look at it; evidence that disappears on the next
+    # `docker compose up --force-recreate` is not being kept.
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  localstack:
+    image: localstack/localstack:3.0.0
+    container_name: weather-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=sqs
+      - DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    networks:
+      - weather-net
+    volumes:
+      - ./database/aws-init.sh:/etc/localstack/init/ready.d/init-aws.sh
+    healthcheck:
+      test: ["CMD", "curl", "-s", "http://localhost:4566/_localstack/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------
+  # Microservices
+  # ----------------------------------------------------
+  api-gateway:
+    build: ./api-gateway
+    container_name: weather-gateway
+    ports:
+      - "8443:8443"
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:8083
+      - DEVICE_SERVICE_URL=http://device-service:8080
+      - SENSOR_SERVICE_URL=http://sensor-service:8081
+      - ANALYTICS_SERVICE_URL=http://analytics-service:8084
+      - ALERT_SERVICE_URL=http://alert-service:8085
+      - AI_SERVICE_URL=http://ai-service:8000
+      - IOT_STREAM_SERVICE_URL=http://iot-stream-service:8087
+      - IOT_STREAM_WS_URL=ws://iot-stream-service:8087
+    env_file:
+      - .env
+    depends_on:
+      - auth-service
+      - device-service
+      - sensor-service
+      - analytics-service
+      - alert-service
+      - ai-service
+      - iot-stream-service
+    networks:
+      - weather-net
+
+  auth-service:
+    build: ./auth-service
+    container_name: weather-auth
+    ports:
+      - "8083:8083"
+    environment:
+      - AUTH_DB_URL=jdbc:postgresql://postgres:5432/auth_db
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8083/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  device-service:
+    build: ./device-service
+    container_name: weather-device
+    ports:
+      - "8080:8080"
+    environment:
+      - DEVICE_DB_URL=jdbc:postgresql://postgres:5432/device_db
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  sensor-service:
+    build: ./sensor-service
+    container_name: weather-sensor
+    ports:
+      - "8081:8081"
+    environment:
+      - SENSOR_DB_URL=jdbc:postgresql://postgres:5432/sensor_db
+      - RABBITMQ_HOST=rabbitmq
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8081/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  analytics-service:
+    build: ./analytics-service
+    container_name: weather-analytics
+    ports:
+      - "8084:8084"
+    environment:
+      - ANALYTICS_DB_URL=jdbc:postgresql://postgres:5432/analytics_db
+      - RABBITMQ_HOST=rabbitmq
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8084/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  alert-service:
+    build: ./alert-service
+    container_name: weather-alert
+    ports:
+      - "8085:8085"
+    environment:
+      - ALERT_DB_URL=jdbc:postgresql://postgres:5432/alert_db
+      - RABBITMQ_HOST=rabbitmq
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8085/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+  iot-ingestion-service:
+    build: ./iot-ingestion-service
+    container_name: weather-iot-ingestion
+    ports:
+      - "8086:8086"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - AWS_SQS_ENDPOINT=http://localstack:4566
+    env_file:
+      - .env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+    networks:
+      - weather-net
+
+  ai-service:
+    build: ./ai-service
+    container_name: weather-ai
+    ports:
+      - "8000:8000"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - AWS_SQS_ENDPOINT=http://localstack:4566
+      # Forecast receipts (ai_db) so the AI scorecard survives restarts.
+      - AI_DB_HOST=postgres
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+    networks:
+      - weather-net
+
+  iot-stream-service:
+    build: ./iot-stream-service
+    container_name: weather-iot-stream
+    ports:
+      - "8087:8087"
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      # source=rabbit mirrors the SQS branch's bus events locally (no IoT Core
+      # in Compose). Set source=aws + AWS_IOT_ENDPOINT for a real deployment.
+      - IOT_STREAM_SOURCE=${IOT_STREAM_SOURCE:-rabbit}
+      - AWS_IOT_ENDPOINT=${AWS_IOT_ENDPOINT:-}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - IOT_STREAM_ALLOWED_ORIGINS=${IOT_STREAM_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:4173}
+    env_file:
+      - .env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - weather-net
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8087/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+
+networks:
+  weather-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  rabbitmq_data:

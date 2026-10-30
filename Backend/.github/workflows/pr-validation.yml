@@ -1,0 +1,56 @@
+name: PR Build & Test Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - auth-service
+          - device-service
+          - sensor-service
+          - analytics-service
+          - alert-service
+          - api-gateway
+          - iot-ingestion-service
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build and Test ${{ matrix.service }}
+        run: mvn clean verify -pl ${{ matrix.service }} -am
+
+  ai-service-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install Dependencies
+        run: |
+          cd ai-service
+          pip install -r requirements.txt
+          pip install pytest httpx
+          
+      - name: Run Pytest
+        run: |
+          cd ai-service
+          pytest test_main.py -v

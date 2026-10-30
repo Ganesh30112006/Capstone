@@ -1,0 +1,19 @@
+# Secrets and local state
+.env
+!.env.example
+.claude/
+Frontend/.conversation/
+
+# Database dumps and runtime logs
+Backend/backup/
+Backend/logs/
+*.log
+
+# Dependencies and build output
+node_modules/
+target/
+dist/
+*.tsbuildinfo
+__pycache__/
+.venv/
+venv/

@@ -1,0 +1,2661 @@
+{
+ "url": "http://localhost:5173/",
+ "at": "2026-10-29T04:24:36.790Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    0.95,
+    1,
+    0.5,
+    0.47,
+    0.46,
+    0.44,
+    0.45,
+    0.83,
+    0.88
+   ],
+   "motion": {
+    "elements": 44,
+    "css": 2,
+    "transitions": 42,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 7293,
+     "screens": 8.1,
+     "words": 675,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 21,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "weather-station-at-nagwain.jpg",
+      "krishna-river-and-bridge-at-vijayawada.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Field/Sense",
+     "words": 1,
+     "chars": 11,
+     "lines": 1,
+     "size": 241.9,
+     "vw": 16.8,
+     "font": "Schibsted Grotesk",
+     "weight": 800,
+     "tracking": -0.05,
+     "leading": 0.88,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.99,
+     "top": 8,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Live air and weather from field stations across Andhra Pradesh.",
+     "words": 10,
+     "lines": 2,
+     "size": 34.6,
+     "font": "Schibsted Grotesk"
+    },
+    "headings": [
+     {
+      "text": "Field/Sense",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 241.9,
+      "vw": 16.8,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.88,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.99,
+      "top": 8,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "28.4°",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 27.6,
+      "vw": 1.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 424,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "36",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 27.6,
+      "vw": 1.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 539,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "57%",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 27.6,
+      "vw": 1.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.14,
+      "top": 655,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "Live air and weather from field stations across Andhra Pradesh.",
+      "words": 10,
+      "chars": 63,
+      "lines": 2,
+      "size": 34.6,
+      "vw": 2.4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.47,
+      "top": 753,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "What it means for you",
+      "words": 5,
+      "chars": 21,
+      "lines": 3,
+      "size": 37.4,
+      "vw": 2.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.14,
+      "top": 926,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur 28.4° · Nellore 28.1° · Srikakulam 27.3° · Tirupati 29.7° · Visakhapatnam 25.4° · Amaravati 27.0° · Kurnool 29.5° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 2.77,
+      "top": 2074,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur 28.4° · Nellore 28.1° · Srikakulam 27.3° · Tirupati 29.7° · Visakhapatnam 25.4° · Amaravati 27.0° · Kurnool 29.5° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 2.77,
+      "top": 2074,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "From the field to your screen",
+      "words": 6,
+      "chars": 29,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.99,
+      "top": 2330,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured",
+      "words": 1,
+      "chars": 8,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.19,
+      "top": 2458,
+      "tag": "div",
+      "kind": "statement"
+     },
+     {
+      "text": "Queued",
+      "words": 1,
+      "chars": 6,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.19,
+      "top": 2458,
+      "tag": "div",
+      "kind": "statement"
+     },
+     {
+      "text": "Checked",
+      "words": 1,
+      "chars": 7,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.19,
+      "top": 2458,
+      "tag": "div",
+      "kind": "statement"
+     },
+     {
+      "text": "Predicted",
+      "words": 1,
+      "chars": 9,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.19,
+      "top": 2458,
+      "tag": "div",
+      "kind": "statement"
+     },
+     {
+      "text": "Shown",
+      "words": 1,
+      "chars": 5,
+      "lines": 1,
+      "size": 28.8,
+      "vw": 2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.19,
+      "top": 2458,
+      "tag": "div",
+      "kind": "statement"
+     },
+     {
+      "text": "Every station on the network",
+      "words": 5,
+      "chars": 28,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.99,
+      "top": 3047,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur Market Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Nellore Coastal",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Srikakulam North",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Western Industrial",
+      "words": 2,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "North Ridge Station",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Lakeside Station",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Airport Field Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.39,
+      "top": 3184,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Reading the numbers",
+      "words": 3,
+      "chars": 19,
+      "lines": 2,
+      "size": 57.6,
+      "vw": 4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.33,
+      "top": 5685,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "F I E L D / S E N S E",
+      "words": 11,
+      "chars": 21,
+      "lines": 1,
+      "size": 106.6,
+      "vw": 7.4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 6635,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 24,
+     "maxLines": 3,
+     "over2Lines": 1,
+     "statements": 5,
+     "centered": 0,
+     "medianWords": 2,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Schibsted Grotesk",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      20,
+      28,
+      30,
+      35,
+      37,
+      58,
+      68,
+      107,
+      242
+     ],
+     "sizeCount": 15,
+     "notLoaded": [],
+     "body": {
+      "font": "Schibsted Grotesk",
+      "size": 17,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": -0.012,
+      "contrast": 6.2
+     },
+     "measureChars": 212,
+     "max": {
+      "size": 241.9,
+      "vw": 16.8,
+      "font": "Schibsted Grotesk",
+      "text": "Field/Sense"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [
+     {
+      "text": "Re-read every",
+      "above": "What it means for you",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 14.9,
+      "top": 832
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e2de",
+       "top": 268,
+       "hsl": {
+        "h": 48,
+        "s": 0.08,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2a4d",
+       "share": 0.83
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.09
+      },
+      {
+       "color": "#4b546c",
+       "share": 0.07
+      },
+      {
+       "color": "#e3e2de",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f3f3f1",
+      "hsl": {
+       "h": 60,
+       "s": 0.08,
+       "l": 0.95
+      },
+      "fg": "#1f2a4d"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 5,
+     "radius": 0,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Live monitor",
+      "Station directory",
+      "Map",
+      "Forecast",
+      "Use my location"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 21,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 5,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 268
+      },
+      {
+       "count": 5,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 908
+      },
+      {
+       "count": 6,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 3152
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.51
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "schibsted grotesk"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 7293,
+    "margins": {
+     "left": 8,
+     "right": 8
+    },
+    "sections": [
+     {
+      "sel": "main#main",
+      "tag": "main",
+      "top": 0,
+      "height": 6443,
+      "words": 577,
+      "media": 21,
+      "middle": 0,
+      "heading": {
+       "text": "Field/Sense",
+       "size": 242,
+       "tag": "span"
+      },
+      "left": 8,
+      "right": 8,
+      "textLeft": 0,
+      "textRight": 0,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "footer.site-foot",
+      "tag": "footer",
+      "top": 6443,
+      "height": 850,
+      "words": 93,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 32,
+      "right": 48,
+      "textLeft": 32,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 6520,
+      "height": 476
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Live air and weather from field stations across Andhra Pradesh.",
+      "size": 35,
+      "top": 753,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Paddy fields in Konaseema, in the Godavari delta.",
+      "side": "left",
+      "px": 8
+     },
+     {
+      "text": "Srikakulam North",
+      "side": "right",
+      "px": 8
+     },
+     {
+      "text": "reporting",
+      "side": "right",
+      "px": 8
+     },
+     {
+      "text": "61% humidity",
+      "side": "right",
+      "px": 8
+     }
+    ],
+    "edges": [
+     {
+      "x": 509,
+      "n": 8
+     },
+     {
+      "x": 8,
+      "n": 3
+     },
+     {
+      "x": 26,
+      "n": 1
+     },
+     {
+      "x": 483,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 17,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0.03,
+    "voidBox": {
+     "x": 1320,
+     "y": 360,
+     "w": 120,
+     "h": 360
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 8,
+   "filled": [
+    0.93,
+    0.69,
+    0.46,
+    0.38,
+    0.38,
+    0.47,
+    0.72,
+    0.86
+   ],
+   "motion": {
+    "elements": 44,
+    "css": 2,
+    "transitions": 42,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 7669,
+     "screens": 7.5,
+     "words": 673,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 2,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "weather-station-at-nagwain.jpg",
+      "krishna-river-and-bridge-at-vijayawada.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Field/Sense",
+     "words": 1,
+     "chars": 11,
+     "lines": 1,
+     "size": 129,
+     "vw": 16.8,
+     "font": "Schibsted Grotesk",
+     "weight": 800,
+     "tracking": -0.05,
+     "leading": 0.88,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.98,
+     "top": 8,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Live air and weather from field stations across Andhra Pradesh.",
+     "words": 10,
+     "lines": 2,
+     "size": 24,
+     "font": "Schibsted Grotesk"
+    },
+    "headings": [
+     {
+      "text": "Field/Sense",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 129,
+      "vw": 16.8,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.88,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.98,
+      "top": 8,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "What it means for you",
+      "words": 5,
+      "chars": 21,
+      "lines": 5,
+      "size": 26,
+      "vw": 3.4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.11,
+      "top": 1237,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur 28.6° · Nellore 28.3° · Srikakulam 27.1° · Tirupati 29.9° · Visakhapatnam 25.2° · Amaravati 26.9° · Kurnool 28.9° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 46.7,
+      "vw": 6.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 3.57,
+      "top": 1936,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur 28.6° · Nellore 28.3° · Srikakulam 27.1° · Tirupati 29.9° · Visakhapatnam 25.2° · Amaravati 26.9° · Kurnool 28.9° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 46.7,
+      "vw": 6.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 3.57,
+      "top": 1936,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "From the field to your screen",
+      "words": 6,
+      "chars": 29,
+      "lines": 1,
+      "size": 46.7,
+      "vw": 6.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.98,
+      "top": 2170,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Every station on the network",
+      "words": 5,
+      "chars": 28,
+      "lines": 1,
+      "size": 46.7,
+      "vw": 6.1,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.98,
+      "top": 3039,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur Market Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Nellore Coastal",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Srikakulam North",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Western Industrial",
+      "words": 2,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "North Ridge Station",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Lakeside Station",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Airport Field Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.59,
+      "top": 3155,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Reading the numbers",
+      "words": 3,
+      "chars": 19,
+      "lines": 2,
+      "size": 34,
+      "vw": 4.4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.32,
+      "top": 5972,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "F I E L D / S E N S E",
+      "words": 11,
+      "chars": 21,
+      "lines": 1,
+      "size": 56.8,
+      "vw": 7.4,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 6942,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 15,
+     "maxLines": 5,
+     "over2Lines": 1,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Schibsted Grotesk",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      24,
+      26,
+      30,
+      34,
+      47,
+      57,
+      129
+     ],
+     "sizeCount": 15,
+     "notLoaded": [],
+     "body": {
+      "font": "Schibsted Grotesk",
+      "size": 17,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": -0.011,
+      "contrast": 6.2
+     },
+     "measureChars": 108,
+     "max": {
+      "size": 129,
+      "vw": 16.8,
+      "font": "Schibsted Grotesk",
+      "text": "Field/Sense"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e2de",
+       "top": 525,
+       "hsl": {
+        "h": 48,
+        "s": 0.08,
+        "l": 0.88
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2a4d",
+       "share": 0.83
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.09
+      },
+      {
+       "color": "#4b546c",
+       "share": 0.07
+      },
+      {
+       "color": "#e3e2de",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f3f3f1",
+      "hsl": {
+       "h": 60,
+       "s": 0.08,
+       "l": 0.95
+      },
+      "fg": "#1f2a4d"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": 0,
+     "height": 64,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Live monitor",
+      "Station directory",
+      "Map",
+      "Forecast"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 2,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 6,
+       "iconTopped": true,
+       "rounded": false,
+       "top": 3123
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.51
+     },
+     {
+      "type": "img",
+      "ratio": 0.13
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "schibsted grotesk"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 7669,
+    "margins": {
+     "left": 8,
+     "right": 8
+    },
+    "sections": [
+     {
+      "sel": "main#main",
+      "tag": "main",
+      "top": 0,
+      "height": 6750,
+      "words": 593,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Field/Sense",
+       "size": 129,
+       "tag": "span"
+      },
+      "left": 8,
+      "right": 8,
+      "textLeft": 0,
+      "textRight": 0,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "footer.site-foot",
+      "tag": "footer",
+      "top": 6750,
+      "height": 919,
+      "words": 93,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 32,
+      "right": 36,
+      "textLeft": 32,
+      "textRight": 36,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 6824,
+      "height": 520
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Live air and weather from field stations across Andhra Pradesh.",
+      "size": 24,
+      "top": 930,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Paddy fields in Konaseema, in the Godavari delta.",
+      "side": "left",
+      "px": 8
+     },
+     {
+      "text": "Nellore Coastal",
+      "side": "right",
+      "px": 8
+     },
+     {
+      "text": "Feels like 32°, air good.",
+      "side": "right",
+      "px": 8
+     },
+     {
+      "text": "· air index",
+      "side": "right",
+      "px": 8
+     },
+     {
+      "text": "Reading the numbers",
+      "side": "left",
+      "px": 8
+     }
+    ],
+    "edges": [
+     {
+      "x": 285,
+      "n": 8
+     },
+     {
+      "x": 8,
+      "n": 3
+     },
+     {
+      "x": 26,
+      "n": 1
+     },
+     {
+      "x": 201,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 17,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 10,
+   "filled": [
+    0.98,
+    0.86,
+    0.89,
+    0.78,
+    0.72,
+    0.82,
+    0.85,
+    0.84,
+    0.92,
+    0.98
+   ],
+   "motion": {
+    "elements": 37,
+    "css": 2,
+    "transitions": 35,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 7755,
+     "screens": 9.2,
+     "words": 678,
+     "img": 2,
+     "video": 0,
+     "canvas": 0,
+     "svg": 15,
+     "sections": 5,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 1,
+     "uiAbuse": false,
+     "realPictures": 2,
+     "videoCount": 0,
+     "uiPictures": 1,
+     "pictureSamples": [
+      "weather-station-at-nagwain.jpg",
+      "krishna-river-and-bridge-at-vijayawada.jpg"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Field/Sense",
+     "words": 1,
+     "chars": 11,
+     "lines": 1,
+     "size": 101.4,
+     "vw": 26,
+     "font": "Schibsted Grotesk",
+     "weight": 800,
+     "tracking": -0.05,
+     "leading": 0.88,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.97,
+     "top": 6,
+     "tag": "div",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Live air and weather from field stations across Andhra Pradesh.",
+     "words": 10,
+     "lines": 3,
+     "size": 24,
+     "font": "Schibsted Grotesk"
+    },
+    "headings": [
+     {
+      "text": "Field/Sense",
+      "words": 1,
+      "chars": 11,
+      "lines": 1,
+      "size": 101.4,
+      "vw": 26,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.88,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 6,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Live air and weather from field stations across Andhra Pradesh.",
+      "words": 10,
+      "chars": 63,
+      "lines": 3,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.05,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 1123,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "What it means for you",
+      "words": 5,
+      "chars": 21,
+      "lines": 2,
+      "size": 35.1,
+      "vw": 9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 1686,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nellore 28.8° · Guntur 29.1° · Srikakulam 27.0° · Tirupati 29.6° · Visakhapatnam 25.0° · Amaravati 26.7° · Kurnool 29.6° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 34.6,
+      "vw": 8.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 5.2,
+      "top": 3215,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Nellore 28.8° · Guntur 29.1° · Srikakulam 27.0° · Tirupati 29.6° · Visakhapatnam 25.0° · Amaravati 26.7° · Kurnool 29.6° ·",
+      "words": 21,
+      "chars": 122,
+      "lines": 1,
+      "size": 34.6,
+      "vw": 8.9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 5.2,
+      "top": 3215,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "From the field to your screen",
+      "words": 6,
+      "chars": 29,
+      "lines": 2,
+      "size": 42.9,
+      "vw": 11,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 3364,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Measured First, a field station takes its reading and sends it over MQTT to AWS IoT Core.",
+      "words": 17,
+      "chars": 89,
+      "lines": 3,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 3477,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Queued Then it waits in a queue, where repeats of the same message are dropped.",
+      "words": 15,
+      "chars": 79,
+      "lines": 3,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 3628,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Checked Next it is range-checked, corrected by its calibration and stored, raw value kept.",
+      "words": 14,
+      "chars": 90,
+      "lines": 3,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 3779,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Predicted Then an AI model forecasts the next readings and flags any that surprise it.",
+      "words": 15,
+      "chars": 86,
+      "lines": 3,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 3929,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Shown Last, this page asks for it again every 5 seconds.",
+      "words": 11,
+      "chars": 56,
+      "lines": 2,
+      "size": 22,
+      "vw": 5.6,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.4,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 4080,
+      "tag": "li",
+      "kind": "statement"
+     },
+     {
+      "text": "Every station on the network",
+      "words": 5,
+      "chars": 28,
+      "lines": 2,
+      "size": 39,
+      "vw": 10,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 4299,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Nellore Coastal",
+      "words": 2,
+      "chars": 15,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 4421,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Guntur Market Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 4618,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Srikakulam North",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 4815,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Western Industrial",
+      "words": 2,
+      "chars": 18,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 5012,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "North Ridge Station",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 5209,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Lakeside Station",
+      "words": 2,
+      "chars": 16,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 5406,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Airport Field Post",
+      "words": 3,
+      "chars": 18,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.87,
+      "top": 5604,
+      "tag": "h3",
+      "kind": "heading"
+     },
+     {
+      "text": "Reading the numbers",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 35.1,
+      "vw": 9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.04,
+      "leading": 0.95,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.97,
+      "top": 5932,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "F I E L D / S E N S E",
+      "words": 11,
+      "chars": 21,
+      "lines": 1,
+      "size": 35.1,
+      "vw": 9,
+      "font": "Schibsted Grotesk",
+      "weight": 800,
+      "tracking": -0.05,
+      "leading": 0.8,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 6836,
+      "tag": "div",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 21,
+     "maxLines": 3,
+     "over2Lines": 1,
+     "statements": 5,
+     "centered": 0,
+     "medianWords": 6,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Schibsted Grotesk",
+       "share": 1,
+       "mono": false
+      }
+     ],
+     "familyCount": 1,
+     "sizes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      21,
+      24,
+      35,
+      39,
+      43,
+      101
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": {
+      "font": "Schibsted Grotesk",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": -0.011,
+      "contrast": 6.2
+     },
+     "measureChars": 53,
+     "max": {
+      "size": 101.4,
+      "vw": 26,
+      "font": "Schibsted Grotesk",
+      "text": "Field/Sense"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#e3e2de",
+       "top": 246,
+       "hsl": {
+        "h": 48,
+        "s": 0.08,
+        "l": 0.88
+       }
+      },
+      {
+       "color": "#f3f3f1",
+       "top": 536,
+       "hsl": {
+        "h": 60,
+        "s": 0.08,
+        "l": 0.95
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#1f2a4d",
+       "share": 0.83
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.09
+      },
+      {
+       "color": "#4b546c",
+       "share": 0.08
+      },
+      {
+       "color": "#e3e2de",
+       "share": 0
+      }
+     ],
+     "button": {
+      "bg": "#f3f3f1",
+      "hsl": {
+       "h": 60,
+       "s": 0.08,
+       "l": 0.95
+      },
+      "fg": "#1f2a4d"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 7,
+     "inHero": 5,
+     "radius": 0,
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Live monitor",
+      "Station directory",
+      "Map",
+      "Forecast",
+      "Overview"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 1,
+     "hairlineSamples": [
+      "nav.tabbar 390px"
+     ],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 1,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 2,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": false,
+       "rounded": false,
+       "top": 1262
+      }
+     ]
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.33
+     }
+    ],
+    "nav": {
+     "links": 2,
+     "fixed": false,
+     "height": 118,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "schibsted grotesk"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 7755,
+    "margins": {
+     "left": 6,
+     "right": 6
+    },
+    "sections": [
+     {
+      "sel": "main#main",
+      "tag": "main",
+      "top": 0,
+      "height": 6720,
+      "words": 686,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Field/Sense",
+       "size": 101,
+       "tag": "span"
+      },
+      "left": 6,
+      "right": 6,
+      "textLeft": 0,
+      "textRight": 0,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.site-foot",
+      "tag": "footer",
+      "top": 6720,
+      "height": 967,
+      "words": 93,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 22,
+      "right": 23,
+      "textLeft": 22,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 6792,
+      "height": 288
+     }
+    ],
+    "h1s": [
+     {
+      "text": "Live air and weather from field stations across Andhra Pradesh.",
+      "size": 24,
+      "top": 1123,
+      "firstScreen": false
+     }
+    ],
+    "edgeText": [
+     {
+      "text": "Paddy fields in Konaseema, in the Godavari delta.",
+      "side": "left",
+      "px": 6
+     },
+     {
+      "text": "Every station on the network",
+      "side": "left",
+      "px": 6
+     },
+     {
+      "text": "stations ·",
+      "side": "left",
+      "px": 15
+     },
+     {
+      "text": "See them on the map",
+      "side": "left",
+      "px": 6
+     },
+     {
+      "text": "Reading the numbers",
+      "side": "left",
+      "px": 6
+     },
+     {
+      "text": "Overview",
+      "side": "left",
+      "px": 15
+     }
+    ],
+    "edges": [
+     {
+      "x": 22,
+      "n": 10
+     },
+     {
+      "x": 6,
+      "n": 3
+     }
+    ],
+    "leftBlocks": 13,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 1440,
+   "message": "1 headline(s) wrap past two lines at 1440px: \"What it means for you\" → 3 lines (5 words, 37.4px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 36px or less."
+  },
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "1 eyebrow/kicker label(s) above headings: \"Re-read every\" above \"What it means for you\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence."
+  },
+  {
+   "level": "FAIL",
+   "id": "icon-cards",
+   "width": 1440,
+   "message": "1 row(s) of identical cards each topped with a small icon (6 cards).",
+   "fix": "Replace with one composed section from the direction: a narrative split, a list set in large type, or real imagery per item.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "15 different font sizes (13, 14, 15, 16, 17, 18, 20, 28, 30, 35, 37, 58, 68, 107, 242).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (6.2:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "measure",
+   "width": 1440,
+   "message": "Longest paragraph runs about 212 characters per line.",
+   "fix": "Cap paragraphs at 45–75 characters (max-width: 60ch).",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "dev-server",
+   "width": 1440,
+   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
+   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "blank-gap",
+   "width": 1440,
+   "message": "A 476px stretch at 6520px holds nothing.",
+   "fix": "Check that it is a deliberate rest (once per page at most); otherwise close it to the normal section gap.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "edge-text",
+   "width": 1440,
+   "message": "4 text block(s) sit within 16px of the screen edge: \"Paddy fields in Konaseema, in \" (8px from the left); \"Srikakulam North\" (8px from the right); \"reporting\" (8px from the right); \"61% humidity\" (8px from the right)",
+   "fix": "Keep text inside the page margin (16–32px or more). Only display type deliberately bled past the edge may touch it.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "covered-text",
+   "width": 1440,
+   "message": "Large text lies under another element at some scroll position: \"Guntur Market Post\" (screen 6, 75% hidden); \"Nellore Coastal\" (screen 6, 50% hidden); \"Srikakulam North\" (screen 6, 25% hidden); \"Western Industrial\" (screen 6, 75% hidden)",
+   "fix": "Nothing may sit on top of a headline or statement. Move the picture, shorten the pinned run, or raise the text above it (z-index) and give it a ground.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "long-pin",
+   "width": 1440,
+   "message": "The same large text stays on screen for 3 screens in a row: \"Every station on the network\"",
+   "fix": "A pinned element earns two screens, and something must change at each. Shorten the run or give every screen its own content."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 768,
+   "message": "1 headline(s) wrap past two lines at 768px: \"What it means for you\" → 5 lines (5 words, 26px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 32px or less."
+  },
+  {
+   "level": "WARN",
+   "id": "small-title",
+   "width": 768,
+   "message": "The h1 is 24px (\"Live air and weather from field stations across An\").",
+   "fix": "Set the title at display size, or make the large text of the first screen the h1."
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 390,
+   "message": "1 headline(s) wrap past two lines at 390px: \"Live air and weather from field stations across \" → 3 lines (10 words, 24px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 24px or less."
+  },
+  {
+   "level": "WARN",
+   "id": "hairline",
+   "width": 390,
+   "message": "1 thin rule(s)/divider line(s): nav.tabbar 390px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields."
+  },
+  {
+   "level": "FAIL",
+   "id": "no-title",
+   "width": 390,
+   "message": "The h1 (\"Live air and weather from field stations across An\") is not on the first screen (it starts 1123px down).",
+   "fix": "The title belongs on the first screen, where a visitor decides whether to stay."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\desktop-page-01.jpg",
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\desktop-page-02.jpg",
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\desktop-page-03.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\tablet-page-01.jpg",
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\mobile-page-01.jpg",
+    "C:\\Users\\chowd\\Downloads\\Capstone\\Frontend\\artifacts\\smart-environment-monitor\\.taste-skill\\after\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

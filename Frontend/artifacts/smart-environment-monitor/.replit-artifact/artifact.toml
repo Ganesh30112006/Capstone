@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Smart Environmental Monitor"
+description = "A professional environmental monitoring frontend with a public observatory for live conditions and a protected admin console for stations, alerts, analytics, AI insights, firmware, and system health."
+version = "1.0.0"
+id = "artifacts/smart-environment-monitor"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18951
+
+[services.development]
+run = "pnpm --filter @workspace/smart-environment-monitor run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-environment-monitor", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/smart-environment-monitor/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18951"
+BASE_PATH = "/"
