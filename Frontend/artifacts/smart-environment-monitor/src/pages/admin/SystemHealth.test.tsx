@@ -44,6 +44,20 @@ describe('SystemHealth', () => {
     vi.mocked(streamApi.getStatus).mockResolvedValue(null as never);
   });
 
+  it('links the broker console only when the deployment provides its address', async () => {
+    vi.mocked(systemApi.getServiceHealth).mockResolvedValue([]);
+
+    vi.stubEnv('VITE_RABBITMQ_UI_URL', '');
+    const { unmount } = renderPage();
+    expect(screen.queryByTestId('link-rabbitmq-ui')).not.toBeInTheDocument();
+    unmount();
+
+    vi.stubEnv('VITE_RABBITMQ_UI_URL', 'http://broker.example.com:15672');
+    renderPage();
+    expect(screen.getByTestId('link-rabbitmq-ui')).toHaveAttribute('href', 'http://broker.example.com:15672');
+    vi.unstubAllEnvs();
+  });
+
   it('does not claim everything is healthy when the probe could not run', async () => {
     vi.mocked(systemApi.getServiceHealth).mockRejectedValue(new Error('gateway unreachable'));
 

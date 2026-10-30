@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { RefreshCw, ShieldCheck } from 'lucide-react';
+import { ExternalLink, RefreshCw, ShieldCheck } from 'lucide-react';
 import { systemApi } from '@/api/systemApi';
 import { streamApi } from '@/api/streamApi';
 import { AdminPageHeader } from '@/components/PageHeaders';
@@ -14,6 +14,11 @@ export function SystemHealth() {
     refetchInterval: 30_000,
   });
   const { data: stream } = useQuery({ queryKey: ['stream-status'], queryFn: streamApi.getStatus });
+
+  // The broker's management UI lives outside the gateway, so its address is a
+  // deployment fact supplied at build time. Unset, no link is offered rather
+  // than one that goes nowhere.
+  const brokerUiUrl = import.meta.env.VITE_RABBITMQ_UI_URL?.trim();
 
   const outages = services.filter((s) => s.status === 'outage');
   const degraded = services.filter((s) => s.status === 'degraded');
@@ -41,7 +46,12 @@ export function SystemHealth() {
         eyebrow="PLATFORM · SERVICE HEALTH"
         title="The machinery behind the signal."
         description="Live probe results for ingestion, registry, alerting, analytics, streaming, and inference. Probes report status and latency only."
-        actions={<button className="button button-secondary" onClick={() => refetch()} disabled={isFetching} data-testid="button-run-health-check"><RefreshCw size={14} />{isFetching ? 'Checking…' : 'Run health check'}</button>}
+        actions={
+          <>
+            {brokerUiUrl && <a className="button button-secondary" href={brokerUiUrl} target="_blank" rel="noopener noreferrer" data-testid="link-rabbitmq-ui"><ExternalLink size={14} />RabbitMQ console</a>}
+            <button className="button button-secondary" onClick={() => refetch()} disabled={isFetching} data-testid="button-run-health-check"><RefreshCw size={14} />{isFetching ? 'Checking…' : 'Run health check'}</button>
+          </>
+        }
       />
 
       <div className="system-summary">
