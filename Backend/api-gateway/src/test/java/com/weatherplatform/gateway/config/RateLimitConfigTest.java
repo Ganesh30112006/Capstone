@@ -123,6 +123,19 @@ class RateLimitConfigTest {
                 "One throttled client must not throttle everyone behind the same load balancer");
     }
 
+    @Test
+    void acceptsUnresolvedRemoteAddressFromForwardedHeaders() {
+        // forward-headers-strategy=framework consumes X-Forwarded-For and
+        // rebuilds the remote address unresolved; getAddress() is then null.
+        ServerWebExchange exchange = MockServerWebExchange.from(
+                MockServerHttpRequest.get("/api/public/stations")
+                        .remoteAddress(InetSocketAddress.createUnresolved("203.0.113.30", 0))
+                        .build());
+
+        StepVerifier.create(rateLimitConfig.filter(exchange, filterChain)).verifyComplete();
+        assertNull(exchange.getResponse().getStatusCode());
+    }
+
     private ServerWebExchange exchangeFor(String path, String ip) {
         return MockServerWebExchange.from(
                 MockServerHttpRequest.post(path)
