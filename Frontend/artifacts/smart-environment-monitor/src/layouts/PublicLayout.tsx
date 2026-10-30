@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Activity, ArrowRight, BrainCircuit, Home, LayoutGrid, Map as MapIcon } from 'lucide-react';
+import { Activity, ArrowRight, BrainCircuit, CloudSun, Home, LayoutGrid, Map as MapIcon } from 'lucide-react';
 import type { ComponentType } from 'react';
 import type { LucideProps } from 'lucide-react';
 import { RefreshStatus } from '@/components/RefreshStatus';
@@ -12,6 +12,7 @@ const PUBLIC_LINKS: Array<[string, string, ComponentType<LucideProps>]> = [
   ['/monitor', 'Live monitor', Activity],
   ['/stations', 'Stations', LayoutGrid],
   ['/map', 'Map', MapIcon],
+  ['/weather', 'Forecast', CloudSun],
   ['/ai-check', 'AI check', BrainCircuit],
 ];
 
